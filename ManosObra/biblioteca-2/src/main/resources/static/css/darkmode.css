@@ -1,0 +1,117 @@
+/*    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  DARK MODE  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  */
+#darkmode {
+  position: relative;
+  /* left: 45%; */
+
+  float: right;
+
+  width: 60px;
+  height: 30px;
+
+  background: #ebebeb;
+  box-shadow: inset 4px 4px 6px #cecece,
+    inset -4px -4px 6px #fff;
+
+  border-radius: 25px;
+
+  cursor: pointer;
+
+  transform: scale(0.8);
+}
+
+.sun {
+  position: absolute;
+  top: 0;
+  right: 30px;
+  width: 30px;
+  height: 30px;
+}
+
+.moon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+}
+
+.toggle {
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  width: 45px;
+  height: 45px;
+
+  transform: scale(.7);
+
+  background: linear-gradient(145deg, #d8d8d8, #FFFFFF);
+
+  border-radius: 25px;
+
+  box-shadow: 2px 2px 2px #c4c4c496,
+    -2px -2px 2px #fff;
+
+  transition: 0.5s;
+}
+
+#darkmode.active .toggle {
+  left: 23px;
+  transition: 0.5s;
+}
+
+body.active {
+  color: #fff;
+  background: #2a2a2a;
+}
+
+
+/*  NAVBAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+#navbar.active{
+  background: #2a2a2a;
+}
+
+#lista1.active{
+  color: #fff;
+}
+
+#lista2.active{
+  color: #fff;
+}
+
+#lista3.active{
+  color: #fff;
+}
+
+
+/*  MAIN >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+#main.active{
+  background: #000000 url(../img/FondoZoom_dark.png);
+  background-size: cover;
+  height: 550px;
+  display: flex;
+  justify-content: end;
+}
+
+#main2.active{
+  background: #000000 url(../img/FondoZoom-dark.png);
+  background-size: cover;
+  height: 550px;
+  display: flex;
+  justify-content: end;
+}
+
+
+/*  FOOTER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+#footer.active {
+  color: #fff;
+}
+
+#footer.active a{
+  color: #ffc041;
+  text-decoration: none;
+}
+
+#sky.active {
+  color: #ffc041;
+  text-decoration: none;
+}

@@ -1,0 +1,41 @@
+* {
+    padding: 0%;
+    margin: 0%;
+
+    /* background-color: #c40c56; */
+}
+
+html,
+body {
+    overflow: auto;
+}
+
+body {
+    min-height: 100vh;
+}
+
+#main2 {
+    background-image: url(../img/FondoZoom.jpg);
+    background-size: cover;
+    height: 550px;
+    display: flex;
+    justify-content: end;
+}
+
+.mensajeExito {
+    width: 20%;
+    margin: auto;
+}
+
+.mensajeError {
+    width: 20%;
+    margin: auto;
+    text-align: center;
+}
+
+.formulario {
+    width: 70%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
