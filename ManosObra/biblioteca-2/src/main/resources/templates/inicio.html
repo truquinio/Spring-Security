@@ -36,12 +36,6 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- DARK-MODE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
-    <div id="darkmode">
-      <img class="sun" src="./img/sun.png">
-      <img class="moon" src="./img/moon.png">
-      <div class="toggle"></div>
-    </div>
 
     <!-- LISTA LIBROS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
     <div class="collapse navbar-collapse elementosNav" id="desplegables">
@@ -103,7 +97,9 @@
       <h2>BIBLIOTECA EGG</h2>
     </div>
     <div class="container contenedorLibros">
-      <p class="tituloLibros">Encontrá todos los Libros Aquí!</p>
+
+      <!-- Valido si Usuario está logueado, muestra msj saludo + nombre de Usuario -->
+      <p class="tituloLibros" th:if="${session.usuariosession != null}" th:text="'¡Hola de vuelta ' + ${session.usuariosession.nombre} + '!'"></p>
 
     <!-- BOTÓN AMARILLO DEL INDEX >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
         <!-- <p class="tituloLibros" th:if="${session.usuariosession != null}" th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre} "></p> -->

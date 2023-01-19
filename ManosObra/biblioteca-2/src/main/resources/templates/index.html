@@ -37,69 +37,23 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- DARK-MODE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
-      <div id="darkmode">
-        <img class="sun" src="./img/sun.png">
-        <img class="moon" src="./img/moon.png">
-        <div class="toggle"></div>
-      </div>
 
-      <!-- CREAR y LISTAR LIBROS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+      <!-- INGRESAR / REGISTRAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
       <div class="collapse navbar-collapse elementosNav" id="desplegables">
 
         <ul class="navbar-nav ms-auto elementos">
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="lista1" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Libros
+          <li class="nav-item">
+            <a class="nav-link" href="/login" id="lista1" role="button" aria-expanded="false">✅ Ingresar</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link " href="/registrar" id="lista1" role="button" aria-expanded="false">📝 Registrate!
             </a>
-
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <!-- En los href pongo a qué controlador se tiene que ir cuando toque "Listar Libros" -->
-              <li><a class="dropdown-item" th:href="@{/libro/lista}">Listar Libros</a></li>
-              <!-- th: = Tag de Thymeleaf -->
-            </ul>
           </li>
-
-
-          <!-- CREAR y LISTAR AUTORES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="" id="lista2" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Autores
-            </a>
-
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="listas">
-              <!-- En los href pongo a qué controlador se tiene que ir cuando toque "Listar Autores" -->
-              <li><a class="dropdown-item" th:href="@{/autor/lista}">Listar Autores</a></li>
-              <!-- th: = Tag de Thymeleaf -->
-            </ul>
-          </li>
-
-          <!-- CREAR y LISTAR EDITORIALES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="lista3" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Editoriales
-            </a>
-
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="listas">
-              <!-- En los href pongo a qué controlador se tiene que ir cuando toque "Listar Editoriales" -->
-              <li><a class="dropdown-item" th:href="@{/editorial/lista}">Listar Editoriales</a></li>
-            </ul>
-          </li>
-
-          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="lista4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Perfil
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="/logout" >Cerrar Sesión</a></li>
-              </ul>
-          </li>
-      </ul>
-  </div>
+        </ul>
+      </div>
 </nav>
   </header>
 
@@ -138,11 +92,11 @@
 
         <!-- BOTÓN AMARILLO DEL INDEX >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
         <!-- <p class="tituloLibros" th:if="${session.usuariosession != null}" th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre} "></p> -->
-        <div>
+        <!-- <a href=/libro/lista class="btn btn-xl mt-2 boton" id="boton">Ver Listado</a> -->
+        <!-- <div>
           <a href=/libro/lista><button type="submit" class="btn btn-primary mt-3" id="boton">Ver Listado</button></a>
-          <!-- <a href=/libro/lista class="btn btn-xl mt-2 boton" id="boton">Ver Listado</a> -->
         </div>
-      </div>
+      </div> -->
 
       <div class="bg-circle-1 bg-circle"></div>
       <div class="bg-circle-2 bg-circle"></div>

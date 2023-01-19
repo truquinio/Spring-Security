@@ -39,13 +39,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- DARK-MODE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
-      <div id="darkmode">
-        <img class="sun" src="/img/sun.png">
-        <img class="moon" src="/img/moon.png">
-        <div class="toggle"></div>
-      </div>
-
+      
       <!-- CREAR y LISTAR LIBROS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
       <div class="collapse navbar-collapse elementosNav" id="desplegables">
 
@@ -128,7 +122,8 @@
           <tr>
             <th scope="col">Id del Autor</th>
             <th scope="col">Nombre del Autor</th>
-            <th scope="col">Acciones</th>
+            <!-- sec:autorize = Condiciono q columna acciones sólo se vea siendo ADMIN -->
+            <th scope="col" sec:autorize="hasRole('ADMIN')">Acciones</th>
 
           </tr>
         </thead>
@@ -137,9 +132,10 @@
             <th scope="row" th:text="${autor.id}"></th>
             <td th:text="${autor.nombre}"></td>
             <td>
-              <a th:href="@{/autor/modificar/__${autor.id}__}"><i class="fas fa-feather-alt"> </i> Modificar </a>
+              <!-- sec:autorize = Condiciono q MODIFICAR sólo se vea siendo ADMIN -->
+              <a sec:autorize="hasRole('ADMIN')" th:href="@{/autor/modificar/__${autor.id}__}"><i
+                  class="fas fa-feather-alt"> </i> Modificar </a>
             </td>
-
           </tr>
 
         </tbody>
@@ -187,7 +183,8 @@
     <div class="containerFooter" id="footer">
       <p class="mb-1">Copyright &copy; truquinio,<br> all rights reserved</p>
       <p class="mb-0">Visit my <a href="https://github.com/truquinio" class="github"><br>GitHub</a> profile or visit my
-        <a href="https://www.linkedin.com/in/federico-trucco/" class="linkedin">LinkedIn</a> profile.</p>
+        <a href="https://www.linkedin.com/in/federico-trucco/" class="linkedin">LinkedIn</a> profile.
+      </p>
       <p class="float-end mb-1">
         <a href="#" class="up-sky" id="sky">⬆️ Ir al cielo</a>
       </p>

@@ -39,12 +39,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- DARK-MODE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
-      <div id="darkmode">
-        <img class="sun" src="/img/sun.png">
-        <img class="moon" src="/img/moon.png">
-        <div class="toggle"></div>
-      </div>
+
 
       <!-- CREAR y LISTAR LIBROS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
       <div class="collapse navbar-collapse elementosNav" id="desplegables">
@@ -130,7 +125,8 @@
             <th scope="col">Ejemplares</th>
             <th scope="col">Autor</th>
             <th scope="col">Editorial</th>
-            <th scope="col">Acciones</th>
+            <!-- sec:autorize = Condiciono q columna acciones sólo se vea siendo ADMIN -->
+            <th scope="col" sec.authorize="hasRole('ADMIN')">Acciones</th>
 
           </tr>
         </thead>
@@ -142,7 +138,8 @@
             <td th:text="${libro.autor.nombre}"></td>
             <td th:text="${libro.editorial.nombre}"></td>
             <td>
-              <a th:href="@{/libro/modificar/__${libro.isbn}__}"><i class="fas fa-feather-alt"></i> Modificar </a>
+              <!-- sec:autorize = Condiciono q MODIFICAR sólo se vea siendo ADMIN -->
+              <a sec.authorize="hasRole('ADMIN')" th:href="@{/libro/modificar/__${libro.isbn}__}"><i class="fas fa-feather-alt"></i> Modificar </a>
             </td>
           </tr>
 
