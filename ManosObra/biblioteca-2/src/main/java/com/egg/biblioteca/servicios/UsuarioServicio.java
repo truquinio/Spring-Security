@@ -2,6 +2,7 @@ package com.egg.biblioteca.servicios;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,10 +15,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.egg.biblioteca.entidades.Imagen;
 import com.egg.biblioteca.entidades.Usuario;
 import com.egg.biblioteca.enumeraciones.Rol;
 import com.egg.biblioteca.excepciones.MiException;
+import com.egg.biblioteca.repositorios.ImagenRepositorio;
 import com.egg.biblioteca.repositorios.UsuarioRepositorio;
 
 import jakarta.servlet.http.HttpSession;
@@ -31,13 +35,18 @@ public class UsuarioServicio implements UserDetailsService {
   // UsuarioRepositorio = @Query("SELECT u FROM Usuario u WHERE u.email = :email")
   private UsuarioRepositorio usuarioRepositorio;
 
+  @Autowired
+  private ImagenServicio imagenServicio;
+
   /*
-   * >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   * MÉTODO REGISTRAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
   @Transactional // @Transactional = Si falla modificación en database hace rollback, no modifica
   // Recibe por parámetros, desde formulario, los datos para setear los attr.
-  public void registrar(String nombre, String email, String password, String password2) throws MiException {
+  // MultipartFile archivo = Formato de archivo
+  public void registrar(MultipartFile archivo, String nombre, String email, String password, String password2)
+      throws MiException {
 
     // Método REGISTRAR, llama a método VALIDAR
     validar(nombre, email, password, password2);
@@ -55,12 +64,68 @@ public class UsuarioServicio implements UserDetailsService {
     // Se da ROL de USER x defecto, para que tenga privilegios comunes y no ADMIN
     usuario.setRol(Rol.USER);
 
+    // Antes de guardar al usuario, guardo la img desde el servicio
+    Imagen imagen = imagenServicio.guardar(archivo);
+
+    // Seteo la img al usuario desde entidad usuario
+    usuario.setImagen(imagen);
+
     // Persisto / Guardo usuario en base de datos
     usuarioRepositorio.save(usuario);
   }
 
   /*
-   * >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   * MÉTODO ACTUALIZAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
+
+  @Transactional
+  public void actualizar(MultipartFile archivo, String idUsuario, String nombre, String email, String password,
+      String password2) throws MiException {
+
+    validar(nombre, email, password, password2);
+
+    // Busco usuario x Id
+    Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
+
+    // Valido si está presente
+    if (respuesta.isPresent()) {
+
+      // Reemplazo objeto Usuario con respuesta del Optional
+      Usuario usuario = respuesta.get();
+
+      // Seteo ATTR de usuario
+      usuario.setNombre(nombre);
+      usuario.setEmail(email);
+
+      // Encripto el password
+      usuario.setPassword(new BCryptPasswordEncoder().encode(password));
+
+      // Seteo el ROL
+      usuario.setRol(Rol.USER);
+
+      // Antes de guardar creo variable q guarda idImagen
+      String idImagen = null; // null para q no de error
+
+      // Valido si img de Usuario existe
+      if (usuario.getImagen() != null) {
+
+        // Guardo en idImagen el id de la img q ya trae el usuario
+        idImagen = usuario.getImagen().getId();
+      }
+
+      // Instancio objeto imagen y la actualizo (recibo archivo + id)
+      Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+
+      // Seteo la img al usuario
+      usuario.setImagen(imagen);
+
+      // Persisto / guardo el usuario en Base de Datos
+      usuarioRepositorio.save(usuario);
+    }
+  }
+
+  /*
+   * MÉTODO VALIDAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
   // VALIDO que todos los parámetros ingresados no sean nulos o estén vacíos.-
@@ -84,7 +149,8 @@ public class UsuarioServicio implements UserDetailsService {
    * >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
-  // Sobrescribo método Abstracto x implements UserDetailsService en class UsuarioServicio
+  // Sobrescribo método Abstracto x implements UserDetailsService en class
+  // UsuarioServicio
   @Override
   // loadUserByUsername = Carga usuario por nombre de usuario (email)
   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -105,13 +171,15 @@ public class UsuarioServicio implements UserDetailsService {
       // Agrego a la ListaPermisos, el objeto "permisos"
       listaPermisos.add(permisos);
 
-      // Capturo la información del USUARIO logueado, para recuperarla y usarla en las vistas
+      // Capturo la información del USUARIO logueado, para recuperarla y usarla en las
+      // vistas
       ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 
       // Guardo el attr y la sesión de solicitud en objeto de interfaz HttpSession
       HttpSession session = attr.getRequest().getSession(true);
 
-      // Seteo los attr usuariosession que contiene todos los valores de usuario en la sesión
+      // Seteo los attr usuariosession que contiene todos los valores de usuario en la
+      // sesión
       session.setAttribute("usuariosession", usuario);
 
       // Retorno un NUEVO USUARIO y traigo Email, Pass y listaPermisos para crearlo
