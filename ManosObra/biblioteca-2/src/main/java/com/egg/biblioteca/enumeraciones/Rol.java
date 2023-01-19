@@ -1,7 +1,7 @@
 package com.egg.biblioteca.enumeraciones;
 
-public enum Rol {
 
-  USER,
-  ADMIN,
+public enum Rol {
+    USER,
+    ADMIN;
 }

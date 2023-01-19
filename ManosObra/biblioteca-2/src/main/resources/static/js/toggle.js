@@ -5,6 +5,8 @@ var nav = document.getElementById('navbar');
 var list1 = document.getElementById('lista1');
 var list2 = document.getElementById('lista2');
 var list3 = document.getElementById('lista3');
+var list4 = document.getElementById('lista4');
+var list5 = document.getElementById('lista5');
 
 var main = document.querySelector('main');
 var main2 = document.querySelector('main2');
@@ -21,6 +23,8 @@ toggle.onclick = function(){
     list1.classList.toggle('active');
     list2.classList.toggle('active');
     list3.classList.toggle('active');
+    list4.classList.toggle('active');
+    list5.classList.toggle('active');
 
     main.classList.toggle('active');
     main2.classList.toggle('active');

@@ -56,6 +56,11 @@
             </a>
 
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <!-- En los href pongo a qué controlador se tiene que ir cuando toque "Crear Libro" -->
+              <li><a class="dropdown-item" th:href="@{/libro/registrar}">Crear Libro</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
               <!-- En los href pongo a qué controlador se tiene que ir cuando toque "Listar Libros" -->
               <li><a class="dropdown-item" th:href="@{/libro/lista}">Listar Libros</a></li>
               <!-- th: = Tag de Thymeleaf -->
@@ -71,6 +76,14 @@
             </a>
 
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="listas">
+              <!-- En los href pongo a qué controlador se tiene que ir cuando toque "Crear Autor" -->
+              <li><a class="dropdown-item" th:href="@{/autor/registrar}">Crear Autor</a></li>
+              <!-- th: = Tag de Thymeleaf -->
+
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+
               <!-- En los href pongo a qué controlador se tiene que ir cuando toque "Listar Autores" -->
               <li><a class="dropdown-item" th:href="@{/autor/lista}">Listar Autores</a></li>
               <!-- th: = Tag de Thymeleaf -->
@@ -85,22 +98,20 @@
             </a>
 
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="listas">
+              <!-- En los href pongo a qué controlador se tiene que ir cuando toque "Crear Editorial" -->
+              <li><a class="dropdown-item" th:href="@{/editorial/registrar}">Crear Editorial</a></li>
+              <!-- th: = Tag de Thymeleaf -->
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+
               <!-- En los href pongo a qué controlador se tiene que ir cuando toque "Listar Editoriales" -->
               <li><a class="dropdown-item" th:href="@{/editorial/lista}">Listar Editoriales</a></li>
             </ul>
-          </li>
-
-          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="lista4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Perfil
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="/logout" >Cerrar Sesión</a></li>
-              </ul>
-          </li>
-      </ul>
-  </div>
-</nav>
+            <!-- th: = Tag de Thymeleaf -->
+        </ul>
+      </div>
+    </nav>
   </header>
 
   <main id="main">

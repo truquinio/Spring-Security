@@ -4,7 +4,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Biblioteca Egg</title>
+  <title>Panel Egg</title>
 
   <!-- CSS only -->
   <link rel="stylesheet" href="./css/reset.css">
@@ -39,8 +39,8 @@
 
       <!-- DARK-MODE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
       <div id="darkmode">
-        <img class="sun" src="./img/sun.png">
-        <img class="moon" src="./img/moon.png">
+        <img class="sun" src="/img/sun.png">
+        <img class="moon" src="/img/moon.png">
         <div class="toggle"></div>
       </div>
 
@@ -56,9 +56,16 @@
             </a>
 
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <!-- En los href pongo a qué controlador se tiene que ir cuando toque "Crear Libro" -->
+              <li><a class="dropdown-item" th:href="@{/libro/registrar}">Crear Libro</a></li>
+              
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+
               <!-- En los href pongo a qué controlador se tiene que ir cuando toque "Listar Libros" -->
               <li><a class="dropdown-item" th:href="@{/libro/lista}">Listar Libros</a></li>
-              <!-- th: = Tag de Thymeleaf -->
+              
             </ul>
           </li>
 
@@ -71,9 +78,16 @@
             </a>
 
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="listas">
+              <!-- En los href pongo a qué controlador se tiene que ir cuando toque "Crear Autor" -->
+              <li><a class="dropdown-item" th:href="@{/autor/registrar}">Crear Autor</a></li>
+
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+
               <!-- En los href pongo a qué controlador se tiene que ir cuando toque "Listar Autores" -->
               <li><a class="dropdown-item" th:href="@{/autor/lista}">Listar Autores</a></li>
-              <!-- th: = Tag de Thymeleaf -->
+
             </ul>
           </li>
 
@@ -85,25 +99,55 @@
             </a>
 
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="listas">
+              <!-- En los href pongo a qué controlador se tiene que ir cuando toque "Crear Editorial" -->
+              <li><a class="dropdown-item" th:href="@{/editorial/registrar}">Crear Editorial</a></li>
+
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+
               <!-- En los href pongo a qué controlador se tiene que ir cuando toque "Listar Editoriales" -->
               <li><a class="dropdown-item" th:href="@{/editorial/lista}">Listar Editoriales</a></li>
             </ul>
+      
+
+        <!-- CREAR y LISTAR USUARIOS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+        <!-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" id="lista4" 
+            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Usuarios
+          </a>
+          
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" th:href="@{/admin/usuarios}">Listar Usuarios</a></li>
+          </ul>
+        </li> -->
+
+        <!-- PERFIL / CERRAR SESIÓN >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="lista5" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Perfil
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="listas">
+            <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+          </ul>
+
+          <li>
+            <hr class="dropdown-divider">
           </li>
 
-          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="lista4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Perfil
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="/logout" >Cerrar Sesión</a></li>
-              </ul>
-          </li>
-      </ul>
-  </div>
-</nav>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="listas">
+            <li><a class="dropdown-item" th:href="@{/perfil}">Editar Perfil</a></li>
+          </ul>
+        </li>
+
+        </ul>
+      </div>
+    </nav>
   </header>
 
-  <main id="main">
+  <main id="main2">
     <!-- EXITO / ERROR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
     <!-- th:if="${exito != null}" = Tag de Thymeleaf + condición -->
     <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito">
@@ -127,7 +171,6 @@
       </div>
     </div>
 
-
     <!-- TEXTO DEL INDEX >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
     <section class="contenedorMain">
       <div class="tituloBiblioteca">
@@ -136,27 +179,27 @@
       <div class="container contenedorLibros">
         <p class="tituloLibros">Encontrá todos los Libros Aquí!</p>
 
-        <!-- BOTÓN AMARILLO DEL INDEX >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-        <!-- <p class="tituloLibros" th:if="${session.usuariosession != null}" th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre} "></p> -->
-        <div>
-          <a href=/libro/lista><button type="submit" class="btn btn-primary mt-3" id="boton">Ver Listado</button></a>
+      <!-- BOTÓN AMARILLO DEL INDEX >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+          <!-- <p class="tituloLibros" th:if="${session.usuariosession != null}" th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre} "></p> -->
+          <div>
+            <a href=/libro/lista><button type="submit" class="btn btn-primary mt-3" id="boton">Ver Listado</button></a>
           <!-- <a href=/libro/lista class="btn btn-xl mt-2 boton" id="boton">Ver Listado</a> -->
-        </div>
+          </div>
       </div>
 
       <div class="bg-circle-1 bg-circle"></div>
       <div class="bg-circle-2 bg-circle"></div>
       <div class="bg-circle-3 bg-circle"></div>
       <div class="bg-circle-4 bg-circle"></div>
-    </section>
-  </main>
+  </section>
+</main>
 
-  <!-- PIE DE PÁGINA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+    <!-- PIE DE PÁGINA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
   <footer class="text-muted py-5">
     <div class="containerFooter" id="footer">
       <p class="mb-1">Copyright &copy; truquinio,<br> all rights reserved</p>
-      <p class="mb-0">Visit my <a href="https://github.com/truquinio" class="github"><br>GitHub</a> profile or visit my
-        <a href="https://www.linkedin.com/in/federico-trucco/" class="linkedin">LinkedIn</a> profile.</p>
+      <p class="mb-0">Visit my <a href="https://github.com/truquinio" class="github"><br>GitHub</a> profile or visit my <a
+          href="https://www.linkedin.com/in/federico-trucco/" class="linkedin">LinkedIn</a> profile.</p>
       <p class="float-end mb-1">
         <a href="#" class="up-sky" id="sky">⬆️ Ir al cielo</a>
       </p>
@@ -171,5 +214,4 @@
     integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
     crossorigin="anonymous"></script>
 </body>
-
 </html>

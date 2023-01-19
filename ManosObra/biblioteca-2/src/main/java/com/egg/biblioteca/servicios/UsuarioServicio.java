@@ -12,12 +12,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.egg.biblioteca.entidades.Usuario;
 import com.egg.biblioteca.enumeraciones.Rol;
 import com.egg.biblioteca.excepciones.MiException;
 import com.egg.biblioteca.repositorios.UsuarioRepositorio;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 
 @Service // @Service = Construir una clase Servicio que conecta a varios repositorios
@@ -101,6 +104,15 @@ public class UsuarioServicio implements UserDetailsService {
 
       // Agrego a la ListaPermisos, el objeto "permisos"
       listaPermisos.add(permisos);
+
+      // Capturo la información del USUARIO logueado, para recuperarla y usarla en las vistas
+      ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+      // Guardo el attr y la sesión de solicitud en objeto de interfaz HttpSession
+      HttpSession session = attr.getRequest().getSession(true);
+
+      // Seteo los attr usuariosession que contiene todos los valores de usuario en la sesión
+      session.setAttribute("usuariosession", usuario);
 
       // Retorno un NUEVO USUARIO y traigo Email, Pass y listaPermisos para crearlo
       return new User(usuario.getEmail(), usuario.getPassword(), listaPermisos);

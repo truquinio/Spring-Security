@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.egg.biblioteca.entidades.Usuario;
 import com.egg.biblioteca.excepciones.MiException;
 import com.egg.biblioteca.servicios.UsuarioServicio;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller // @Controller = Indica al framework de Spring q clase es de tipo controladora
 @RequestMapping("/") // @RequestMapping("/") = Configura URL q va a escuchar a clase controladora
@@ -60,7 +63,7 @@ public class PortalControlador { // localhost:8080/
       modelo.put("exito", "¡Usuario registrado correctamente!");
 
       // Si registra OK, dirige al INDEX
-      return "index.html";
+      return "login.html";
 
     } catch (MiException e) {
 
@@ -82,7 +85,8 @@ public class PortalControlador { // localhost:8080/
 
   @GetMapping("/login")
 
-  // @RequestParam required: false = En caso q formulario LOGIN pueda tener o no error
+  // @RequestParam required: false = En caso q formulario LOGIN pueda tener o no
+  // error
   public String login(@RequestParam(required = false) String error, ModelMap modelo) {
     // MODELmap = nos permite imprimir mjs o interactúar con el HTML
 
@@ -100,10 +104,23 @@ public class PortalControlador { // localhost:8080/
 
   // CONTROLADOR para devolver una vista al LOGIN
 
- // @PreAuthorize = Limito a q solo accedan a inicio.html usuarios logueados
-  @PreAuthorize ("hasAnyRole('ROLE_USER', 'ROLE ADMIN')")
+
+  //NO FUNCIONA... ME PERMITE VER EL INICIO SIN ESTAR LOGUEADO 
+
+  // @PreAuthorize = Limito a q solo accedan a inicio.html usuarios logueados
+  @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
   @GetMapping("/inicio")
-  public String inicio() {
+  public String inicio(HttpSession session) {
+
+    // Creo Usuario que recibe datos de sesión / usuariosession desde clase UsuarioServicio
+    Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+
+    // Valido si el rol de Usuario, en formato string, es = a ADMIN
+    if (logueado.getRol().toString().equals("ADMIN")){
+
+      // Redirecciono al Dashboard /panel.html
+      return "redirect:/admin/dashboard";
+    }
 
     // Si desde SeguridadWeb el LOGIN es OK, nos lleva a URL /inicio.html
     return "inicio.html";

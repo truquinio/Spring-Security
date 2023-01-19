@@ -71,6 +71,8 @@ public class SeguridadWeb {
     // Recursos dentro de carpetas CSS/JS/IMG son accesibles a cualquier usuario
     http
         .authorizeHttpRequests()
+        // Condiciono toda la clase ADMIN para que solo ADMIN pueda acceder
+        .requestMatchers("/admin/*").hasRole("ADMIN") 
         .requestMatchers("/css/*", "/js/*", "/img/*", "/**")
         .permitAll()
 

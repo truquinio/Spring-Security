@@ -23,6 +23,14 @@ body {
     justify-content: end;
 }
 
+#main2 {
+    background-image: url(../img/FondoZoom_1.jpg);
+    background-size: cover;
+    height: 550px;
+    display: flex;
+    justify-content: end;
+}
+
 .tituloBiblioteca {
     margin-top: 150px;
 
