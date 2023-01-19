@@ -20,7 +20,7 @@ import com.egg.biblioteca.repositorios.LibroRepositorio;
 @Service // @Service = Construir una clase Servicio que conecta a varios repositorios
 public class LibroServicio {
 
-  // Attr global  instanciado con @Autowired desde claseRepositorio
+  // Attr global instanciado con @Autowired desde claseRepositorio
   @Autowired // @Autowired = Inyección de dependencias, vincula al JPA
   private LibroRepositorio libroRepositorio;
 
@@ -33,7 +33,9 @@ public class LibroServicio {
   @Autowired
   ValidacionServicio validacion;
 
-  // MÉTODO CREAR LIBROS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  /*
+   * MÉTODO CREAR LIBROS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
 
   @Transactional // @Transactional = Si falla modificación en database hace rollback, no modifica
   public void crearLibro(Long isbn, String titulo, Integer ejemplares, String idAutor, String idEditorial)
@@ -67,7 +69,7 @@ public class LibroServicio {
     libro.setIsbn(isbn);
     libro.setTitulo(titulo);
     libro.setEjemplares(ejemplares);
-    libro.setAlta(new Date());    //  setAlta(new Date()) = Para que se instancie nuevo objeto, con fecha actual
+    libro.setAlta(new Date()); // setAlta(new Date()) = Para que se instancie nuevo objeto, con fecha actual
     libro.setAutor(autor);
     libro.setEditorial(editorial);
 
@@ -75,7 +77,9 @@ public class LibroServicio {
     libroRepositorio.save(libro);
   }
 
-  // MÉTODO LISTAR LIBROS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  /*
+   * MÉTODO LISTAR LIBROS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
 
   public List<Libro> listarLibros() {
 
@@ -87,7 +91,9 @@ public class LibroServicio {
     return libros;
   }
 
-  // MÉTODO MODIFICAR LIBROS  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  /*
+   * MÉTODO MODIFICAR LIBROS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
 
   @Transactional
   public void modificarLibro(Long isbn, String titulo, String idAutor, String idEditorial, Integer ejemplares)
@@ -134,6 +140,6 @@ public class LibroServicio {
 
   // MÉTODO getOne = Trae primer resultado de database que coincida con id
   public Libro getOne(Long isbn) {
-  return libroRepositorio.getOne(isbn);
+    return libroRepositorio.getOne(isbn);
   }
 }

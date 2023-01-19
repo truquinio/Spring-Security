@@ -21,7 +21,7 @@
 }
 
 
-#guardar {
+#botonAmarillo {
   position: relative;
   left: 42.5%;
 
@@ -37,15 +37,15 @@
   box-shadow: 0px 2px 16px 4px rgba(0, 0, 0, 0.36);
 }
 
-#guardar:hover {
+#botonAmarillo:hover {
   transform: scale(1.2);
 }
 
-#guardar:active {
+#botonAmarillo:active {
   box-shadow: none;
 }
 
-#actualizar {
+/* #actualizar {
   position: relative;
   left: 42.5%;
 
@@ -67,7 +67,7 @@
 
 #actualizar:active {
   box-shadow: none;
-}
+} */
 
 .volver {
   width: 50%;

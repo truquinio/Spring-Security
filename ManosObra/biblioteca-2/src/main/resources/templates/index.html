@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="/css/index.css">
   <link rel="stylesheet" href="/css/navbar.css">
   <link rel="stylesheet" href="/css/darkmode.css">
+  <link rel="stylesheet" href="/css/exitoError.css">
   <link rel="stylesheet" href="/css/botones.css">
   <link rel="stylesheet" href="/css/footer.css">
 </head>
@@ -113,10 +114,10 @@
       </ul>
     </div>
   </nav>
-</header>
-  
-<main id="main">
-  <!-- EXITO / ERROR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+  </header>
+
+  <main id="main">
+    <!-- EXITO / ERROR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
     <!-- th:if="${exito != null}" = Tag de Thymeleaf + condición -->
     <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito">
       <div class="card-body">
@@ -150,7 +151,6 @@
 
       <!-- BOTÓN AMARILLO DEL INDEX >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
           <!-- <p class="tituloLibros" th:if="${session.usuariosession != null}" th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre} "></p> -->
-          
           <div>
             <a href=/libro/lista><button type="submit" class="btn btn-primary mt-3" id="boton">Ver Listado</button></a>
           <!-- <a href=/libro/lista class="btn btn-xl mt-2 boton" id="boton">Ver Listado</a> -->

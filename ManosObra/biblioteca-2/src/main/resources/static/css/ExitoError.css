@@ -1,0 +1,27 @@
+.mensajeExito {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    margin: 0%;
+    padding: 0%;
+
+    width: auto;
+    height: auto;
+    text-align: center;
+}
+
+.mensajeError {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    margin: 0%;
+    padding: 0%;
+
+    width: auto;
+    height: auto;
+    text-align: center;
+}

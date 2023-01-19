@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.egg.biblioteca.entidades.Usuario;
@@ -20,11 +21,16 @@ import com.egg.biblioteca.repositorios.UsuarioRepositorio;
 import jakarta.transaction.Transactional;
 
 @Service // @Service = Construir una clase Servicio que conecta a varios repositorios
+// implements UserDetailsService = Para que implemente una interfaz especial
 public class UsuarioServicio implements UserDetailsService {
-  // implements UserDetailsService = Para que implemente una interfaz especial
 
   @Autowired // @Autowired = Inyección de dependencias, vincula al JPA
+  // UsuarioRepositorio = @Query("SELECT u FROM Usuario u WHERE u.email = :email")
   private UsuarioRepositorio usuarioRepositorio;
+
+  /*
+   * >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
 
   @Transactional // @Transactional = Si falla modificación en database hace rollback, no modifica
   // Recibe por parámetros, desde formulario, los datos para setear los attr.
@@ -36,10 +42,12 @@ public class UsuarioServicio implements UserDetailsService {
     // Instancio objeto "usuario" de clase USUARIO
     Usuario usuario = new Usuario();
 
-    // Seteo Nombre, Email, Password
+    // Seteo Nombre, Email
     usuario.setNombre(nombre);
     usuario.setEmail(email);
-    usuario.setPassword(password);
+
+    // Seteo el password, pero la encripto con BCryptPasswordEncoder
+    usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 
     // Se da ROL de USER x defecto, para que tenga privilegios comunes y no ADMIN
     usuario.setRol(Rol.USER);
@@ -48,7 +56,11 @@ public class UsuarioServicio implements UserDetailsService {
     usuarioRepositorio.save(usuario);
   }
 
-  // VALIDAR que todos los parámetros ingresados no sean nulos o estén vacíos.-
+  /*
+   * >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
+
+  // VALIDO que todos los parámetros ingresados no sean nulos o estén vacíos.-
   private void validar(String nombre, String email, String password, String password2) throws MiException {
 
     if (nombre.isEmpty() || nombre == null) {
@@ -65,27 +77,34 @@ public class UsuarioServicio implements UserDetailsService {
     }
   }
 
-  // Método Abstracto por implements UserDetailsService en class UsuarioServicio
+  /*
+   * >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
+
+  // Sobrescribo método Abstracto x implements UserDetailsService en class UsuarioServicio
   @Override
+  // loadUserByUsername = Carga usuario por nombre de usuario (email)
   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    
+
+    // Guardo el mail del usuarioRepositorio en un objeto "usuario" de clase USUARIO
     Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
 
-    if (usuario != null){
+    if (usuario != null) {
 
       // Creo la LISTA de PERMISOS de usuario
-      List<GrantedAuthority> listaPermisos = new ArrayList();
+      List<GrantedAuthority> listaPermisos = new ArrayList<>();
 
+      // GrantedAuthority / SimpleGrantedAuthority = Otorgan permisos de usuario
       // Instancio objeto "permisos" y concateno el ROL del usuario
-      GrantedAuthority permisos = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString()); // ROLE_USER (el rol viene del ENUM)
-      // GrantedAuthority y SimpleGrantedAuthority = Otorgan permisos de usuario
+      // ROLE_USER (rol viene del ENUM)
+      GrantedAuthority permisos = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
 
       // Agrego a la ListaPermisos, el objeto "permisos"
       listaPermisos.add(permisos);
 
-      // Retorno un NUEVO USUARIO y me traigo Email, Pass y lista de Permisos para crearlo.
+      // Retorno un NUEVO USUARIO y traigo Email, Pass y listaPermisos para crearlo
       return new User(usuario.getEmail(), usuario.getPassword(), listaPermisos);
-    
+
     } else {
 
       return null;

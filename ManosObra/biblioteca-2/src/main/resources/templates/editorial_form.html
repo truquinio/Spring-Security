@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="/css/formulario.css">
   <link rel="stylesheet" href="/css/navbar.css">
   <link rel="stylesheet" href="/css/darkmode.css">
+  <link rel="stylesheet" href="/css/exitoError.css">
   <link rel="stylesheet" href="/css/botones.css">
   <link rel="stylesheet" href="/css/footer.css">
 </head>
@@ -126,7 +127,8 @@
         <input type="text" class="form-control" name="nombre" placeholder="Nombre de la Editorial">
       </div>
 
-      <button type="submit" class="btn btn-primary mt-3 botones" id="guardar">Guardar</button>
+      <!-- BOTÓN GUARDAR  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+      <button type="submit" class="btn btn-primary mt-3 botones" id="botonAmarillo">Guardar</button>
     </form>
 
     <div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3 mensajeExito">

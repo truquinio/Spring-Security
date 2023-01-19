@@ -22,17 +22,6 @@ body {
     justify-content: end;
 }
 
-.mensajeExito {
-    width: 20%;
-    margin: auto;
-}
-
-.mensajeError {
-    width: 20%;
-    margin: auto;
-    text-align: center;
-}
-
 .formulario {
     width: 70%;
     margin: auto;

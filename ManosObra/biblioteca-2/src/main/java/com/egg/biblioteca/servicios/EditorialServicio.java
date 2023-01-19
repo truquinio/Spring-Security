@@ -14,14 +14,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Service // @Service = Construir una clase Servicio que conecta a varios repositorios
 public class EditorialServicio {
 
-  // Attr global  instanciado con @Autowired desde claseRepositorio
+  // Attr global instanciado con @Autowired desde claseRepositorio
   @Autowired // @Autowired = Inyección de dependencias, vincula al JPA
   EditorialRepositorio editorialRepositorio;
 
   @Autowired
   ValidacionServicio validacion;
 
-  // MÉTODO CREAR EDITORIALES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  /*
+   * MÉTODO CREAR EDITORIALES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
 
   @Transactional // @Transactional = Si falla modificación en database hace rollback, no modifica
   public void crearEditorial(String nombre) throws MiException {
@@ -39,20 +41,24 @@ public class EditorialServicio {
     editorialRepositorio.save(editorial);
   }
 
-  // MÉTODO LISTAR EDITORIALES  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  /*
+   * MÉTODO LISTAR EDITORIALES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
 
   @Transactional(readOnly = true)
   public List<Editorial> listarEditoriales() {
 
     List<Editorial> editoriales = new ArrayList<>();
 
-    // Encuentra autores dentro de database, los mete en arraylist editoriales
+    // Encuentra editoriales dentro de database, los mete en arraylist editoriales
     editoriales = editorialRepositorio.findAll();
 
     return editoriales;
   }
 
-    // MÉTODO MODIFICAR EDITORIALES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  /*
+   * MÉTODO MODIFICAR EDITORIALES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
 
   @Transactional
   public void modificarEditorial(String id, String nombre) throws MiException {
@@ -77,7 +83,9 @@ public class EditorialServicio {
     }
   }
 
-  //  MÉTODO ELIMINAR EDITORIALES  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  /*
+   * MÉTODO ELIMINAR EDITORIALES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
 
   @Transactional
   public void eliminar(String id) throws MiException {
@@ -85,9 +93,7 @@ public class EditorialServicio {
     editorialRepositorio.delete(editorial);
   }
 
-
   // MÉTODO getOne = Trae primer resultado de database que coincida con id
-
   public Editorial getOne(String id) {
     return editorialRepositorio.getOne(id);
   }

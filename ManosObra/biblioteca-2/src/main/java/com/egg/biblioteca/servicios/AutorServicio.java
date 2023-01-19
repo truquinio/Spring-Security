@@ -15,16 +15,18 @@ import com.egg.biblioteca.repositorios.AutorRepositorio;
 @Service // @Service = Construir una clase Servicio que conecta a varios repositorios
 public class AutorServicio {
 
-  // Attr global  instanciado con @Autowired desde claseRepositorio
+  // Attr global instanciado con @Autowired desde claseRepositorio
   @Autowired // @Autowired = Inyección de dependencias, vincula al JPA
   AutorRepositorio autorRepositorio;
 
   @Autowired
   ValidacionServicio validacion;
 
-  // MÉTODO CREAR AUTORES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  /*
+   * MÉTODO CREAR AUTORES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
 
-  @Transactional  // @Transactional = Si falla modificación en database hace rollback, no modifica
+  @Transactional // @Transactional = Si falla modificación en database hace rollback, no modifica
   public void crearAutor(String nombre) throws MiException {
 
     // validarNombre, desde ValidacionServicio
@@ -40,7 +42,9 @@ public class AutorServicio {
     autorRepositorio.save(autor);
   }
 
-  // MÉTODO LISTAR AUTORES  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  /*
+   * MÉTODO LISTAR AUTORES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
 
   public List<Autor> listarAutores() {
 
@@ -52,8 +56,10 @@ public class AutorServicio {
     return autores;
   }
 
-  // MÉTODO MODIFICAR AUTORES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
+  /*
+   * MÉTODO MODIFICAR AUTORES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
+  
   @Transactional
   public void modificarAutor(String id, String nombre) throws MiException {
 
@@ -63,7 +69,7 @@ public class AutorServicio {
     Optional<Autor> respuestaAutor = autorRepositorio.findById(id);
     // Optional = Por si id existe o no y si contiene algún error
 
-    // Valida  si la respuesta está presente
+    // Valida si la respuesta está presente
     if (respuestaAutor.isPresent()) {
 
       // Si está presente, traigo esa respuesta
@@ -77,7 +83,9 @@ public class AutorServicio {
     }
   }
 
-  //  MÉTODO ELIMINAR AUTORES  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  /*
+   * MÉTODO ELIMINAR AUTORES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
 
   @Transactional
   public void eliminarAutor(String id) throws MiException {
