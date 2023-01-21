@@ -86,14 +86,16 @@ public class EditorialServicio {
   /*
    * MÉTODO ELIMINAR EDITORIALES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
-
   @Transactional
-  public void eliminar(String id) throws MiException {
+  public void eliminarEditorial(String id) throws MiException {
     Editorial editorial = editorialRepositorio.getById(id);
     editorialRepositorio.delete(editorial);
   }
 
-  // MÉTODO getOne = Trae primer resultado de database que coincida con id
+  /*
+   * ÉTODO getOne >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   * Trae primer resultado de database que coincida con id
+   */
   public Editorial getOne(String id) {
     return editorialRepositorio.getOne(id);
   }

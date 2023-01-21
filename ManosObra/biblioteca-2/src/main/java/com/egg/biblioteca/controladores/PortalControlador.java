@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.egg.biblioteca.entidades.Usuario;
 import com.egg.biblioteca.excepciones.MiException;
@@ -23,7 +24,7 @@ public class PortalControlador { // localhost:8080/
   private UsuarioServicio usuarioServicio;
 
   /*
-   * >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   * INDEX  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
   @GetMapping("/") // @GetMapping("/") = Se accede a travez de una operación GET de HTTP
@@ -34,8 +35,7 @@ public class PortalControlador { // localhost:8080/
   }
 
   /*
-   * MÉTODO REGISTRAR
-   * >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   * MÉTODO REGISTRAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
   // CONTROLADOR q envía todos los datos de FORMULARIO por método GET
@@ -52,12 +52,12 @@ public class PortalControlador { // localhost:8080/
   // CONTROLADOR q recibe todos los datos de FORMULARIO por método POST
   @PostMapping("/registro")
   public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password,
-      String password2, ModelMap modelo) {
+      String password2, ModelMap modelo, MultipartFile archivo) {
     // Recibe todos los parámetros del formulario / MODELmap = interactúa con HTML
+    // MultipartFile archivo = Recibe la img
 
     try {
-
-      usuarioServicio.registrar(nombre, email, password, password2);
+      usuarioServicio.registrar(archivo, nombre, email, password, password2);
 
       // MSJ que muestra cuando se registra OK
       modelo.put("exito", "¡Usuario registrado correctamente!");
@@ -104,25 +104,30 @@ public class PortalControlador { // localhost:8080/
 
   // CONTROLADOR para devolver una vista al LOGIN
 
-
-  //NO FUNCIONA... ME PERMITE VER EL INICIO SIN ESTAR LOGUEADO 
-
   // @PreAuthorize = Limito a q solo accedan a inicio.html usuarios logueados
   @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
   @GetMapping("/inicio")
   public String inicio(HttpSession session) {
 
-    // Creo Usuario que recibe datos de sesión / usuariosession desde clase UsuarioServicio
-    Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+    try {
 
-    // Valido si el rol de Usuario, en formato string, es = a ADMIN
-    if (logueado.getRol().toString().equals("ADMIN")){
+      // Creo Usuario que recibe datos de sesión / usuariosession desde clase
+      // UsuarioServicio
+      Usuario logueado = (Usuario) session.getAttribute("usuariosession");
 
-      // Redirecciono al Dashboard /panel.html
-      return "redirect:/admin/dashboard";
+      // Valido si el rol de Usuario, en formato string, es = a ADMIN
+      if (logueado.getRol().toString().equals("ADMIN")) {
+
+        // Redirecciono al Dashboard /panel.html
+        return "redirect:/admin/dashboard";
+      }
+
+      // Si desde SeguridadWeb el LOGIN es OK, nos lleva a URL /inicio.html
+      return "inicio.html";
+
+    } catch (Exception e) {
+
+      return "login.html";
     }
-
-    // Si desde SeguridadWeb el LOGIN es OK, nos lleva a URL /inicio.html
-    return "inicio.html";
   }
 }

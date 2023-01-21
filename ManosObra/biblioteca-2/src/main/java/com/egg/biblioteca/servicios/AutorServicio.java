@@ -84,16 +84,18 @@ public class AutorServicio {
   }
 
   /*
-   * MÉTODO ELIMINAR AUTORES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   * MÉTODO ELIMINAR AUTOR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
-
   @Transactional
   public void eliminarAutor(String id) throws MiException {
     Autor autor = autorRepositorio.getById(id);
     autorRepositorio.delete(autor);
   }
 
-  // MÉTODO getOne = Trae primer resultado de database que coincida con id
+  /*
+   * MÉTODO getOne >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   * Trae primer resultado de database que coincida con id
+   */
   public Autor getOne(String id) {
     return autorRepositorio.getOne(id);
   }

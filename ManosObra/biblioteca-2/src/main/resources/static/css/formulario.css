@@ -7,7 +7,7 @@
 
 html,
 body {
-    overflow: auto;
+    overflow: hidden;
 }
 
 body {
@@ -22,9 +22,16 @@ body {
     justify-content: end;
 }
 
+#cargar{
+    align-items: left;
+    text-align: left;
+
+    font-size: bolder;
+}
+
 .formulario {
     width: 70%;
-    margin: auto;
+    margin: -30px auto 120px auto;
     display: flex;
     flex-direction: column;
 }

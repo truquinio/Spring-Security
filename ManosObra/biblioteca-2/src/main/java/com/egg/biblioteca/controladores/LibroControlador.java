@@ -20,21 +20,27 @@ import com.egg.biblioteca.servicios.AutorServicio;
 import com.egg.biblioteca.servicios.EditorialServicio;
 import com.egg.biblioteca.servicios.LibroServicio;
 
-@Controller // @Controller = Indica al framework de Spring que la clase es de tipo controladora
-@RequestMapping("/libro") // @RequestMapping("/autor") = Configura la URL que va a escuchar a la clase
-                          // controladora
+import jakarta.persistence.Id;
+
+@Controller // @Controller = Indica al framework de Spring que la clase es de tipo
+            // controladora
+@RequestMapping("/libro") // @RequestMapping = Configura la URL q va a escuchar clase controladora
 public class LibroControlador {
 
   @Autowired // @Autowired = Inyección de dependencias, vincula al JPA
   private LibroServicio libroServicio;
 
-  @Autowired // @Autowired = Inyección de dependencias, vincula al JPA
+  @Autowired
   private AutorServicio autorServicio;
 
-  @Autowired // @Autowired = Inyección de dependencias, vincula al JPA
+  @Autowired
   private EditorialServicio editorialServicio;
 
-  @GetMapping("/registrar") // @GetMapping("/registrar") = Se accede a travez de una operación GET de HTTP
+  /*
+   * MÉTODO CREAR EDITORIALES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
+
+  @GetMapping("/registrar") // @GetMapping = Se accede a travez de una operación GET de HTTP
   public String registrar(ModelMap modelo) { // localhost:8080/libro/registrar
 
     // Guardo en listas todo lo que nos trae el repositorio
@@ -48,19 +54,16 @@ public class LibroControlador {
     return "libro_form.html"; // Retorna un String "archivo.html" que debo crear dentro de resources/templates
   }
 
-  @PostMapping("/registro") // @PostMapping("/registro") = Se accede al action de HTML a travez de un método POST
-
-  // MÉTODO REGISTRO: Recibe los parámetros llamados igual que los attr name del INPUT del HTML
+  @PostMapping("/registro") // @PostMapping("/registro") = Se accede al action de HTML a travez de un método
+                            // POST
   public String registro(@RequestParam(required = false) Long isbn, @RequestParam String titulo,
       @RequestParam(required = false) Integer ejemplares, @RequestParam String idAutor,
       @RequestParam String idEditorial, ModelMap modelo) {
-
-    // @RequestParam = Indica al controlador que este parámetro va a viajar en la
-    // URL y se va a ejecutar cuando se llene el formulario
-    // (required=false) = Para evitar que se envíe un valor numérico nulo y se rompa
-    // el código
-    // ModelMap = Inserta toda la información que vamos a mostrar por pantalla /
-    // interface del usuario
+    // Método registro = Recibe parámetro llamado igual q atributo name de INPUT de
+    // HTML
+    // @RequestParam = Indica a controlador q parámetro viaja en la URL y se ejecuta
+    // cuando llene formulario
+    // ModelMap = Inserta información q vamos a mostrar en interface del usuario
 
     // System.out.println("Nombre: " + nombre);
 
@@ -91,19 +94,22 @@ public class LibroControlador {
     }
   }
 
-  // LISTAR LIBROS  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  /*
+   * MÉTODO LISTAR LIBROS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
   @GetMapping("/lista")
   public String listar(ModelMap modelo) {
 
     List<Libro> libros = libroServicio.listarLibros();
-    
+
     modelo.addAttribute("libros", libros);
 
     return "libro_list";
   }
 
-  
-  // MODIFICAR LIBROS  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  /*
+   * MÉTODO MODIFICAR LIBROS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
 
   @GetMapping("/modificar/{isbn}")
   public String modificar(@PathVariable Long isbn, ModelMap modelo) {
@@ -146,5 +152,19 @@ public class LibroControlador {
 
       return "libro_modificar.html";
     }
+  }
+
+  /*
+   * MÉTODO ELIMINAR LIBRO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
+  @GetMapping("/eliminar/{id}")
+  public String eliminar(@PathVariable Long id, ModelMap modelo) {
+    try {
+      libroServicio.eliminarLibro(id);
+
+    } catch (MiException e) {
+      modelo.put("error", e.getMessage());
+    }
+    return "redirect:/libro/lista";
   }
 }

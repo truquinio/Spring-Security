@@ -1,9 +1,5 @@
 package com.egg.biblioteca.servicios;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,11 +18,13 @@ import com.egg.biblioteca.entidades.Imagen;
 import com.egg.biblioteca.entidades.Usuario;
 import com.egg.biblioteca.enumeraciones.Rol;
 import com.egg.biblioteca.excepciones.MiException;
-import com.egg.biblioteca.repositorios.ImagenRepositorio;
 import com.egg.biblioteca.repositorios.UsuarioRepositorio;
+// import static com.sun.jmx.snmp.SnmpStatusException.readOnly;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import jakarta.servlet.http.HttpSession;
-import jakarta.transaction.Transactional;
 
 @Service // @Service = Construir una clase Servicio que conecta a varios repositorios
 // implements UserDetailsService = Para que implemente una interfaz especial
@@ -124,6 +123,46 @@ public class UsuarioServicio implements UserDetailsService {
     }
   }
 
+  public Usuario getOne(String id) {
+    return usuarioRepositorio.getOne(id);
+  }
+
+  /*
+   * LISTAR USUARIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
+
+  @Transactional(readOnly = true)
+  public List<Usuario> listarUsuarios() {
+
+    List<Usuario> usuarios = new ArrayList();
+
+    usuarios = usuarioRepositorio.findAll();
+
+    return usuarios;
+  }
+
+  /*
+   * CAMBIAR ROL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
+
+  @Transactional
+  public void cambiarRol(String id) {
+    Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+
+    if (respuesta.isPresent()) {
+
+      Usuario usuario = respuesta.get();
+
+      if (usuario.getRol().equals(Rol.USER)) {
+
+        usuario.setRol(Rol.ADMIN);
+
+      } else if (usuario.getRol().equals(Rol.ADMIN)) {
+        usuario.setRol(Rol.USER);
+      }
+    }
+  }
+
   /*
    * MÉTODO VALIDAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
@@ -146,11 +185,10 @@ public class UsuarioServicio implements UserDetailsService {
   }
 
   /*
-   * >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   * MÉTODO CARGAR x NOMBRE USUARIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
-  // Sobrescribo método Abstracto x implements UserDetailsService en class
-  // UsuarioServicio
+  // Sobrescribo método Abstracto x implements UserDetailsService en class UsuarioServicio
   @Override
   // loadUserByUsername = Carga usuario por nombre de usuario (email)
   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

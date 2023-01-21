@@ -7,12 +7,11 @@
 
 html,
 body {
-    overflow: auto;
+    overflow: hidden;
 }
 
 body {
     min-height: 100vh;
-    text-align: center;
 }
 
 #main {
@@ -71,6 +70,21 @@ body {
     /* background: yellowgreen; */
 }
 
+#imgPerfil {
+    transform: scale(1.6);
+    box-sizing: border-box;
+
+    margin: 10px 0 -70px 0;
+    padding: 0;
+
+    width: 50px;
+    height: 50px;
+
+    border-radius: 10px;
+
+    box-shadow: 0px 10px 13px -7px #000000, 0px 9px 23px 5px rgba(0, 0, 0, 0);
+}
+
 .containerFooter {
     display: flex;
     justify-content: space-around;
@@ -79,7 +93,7 @@ body {
 
 .boton {
     background-color: #ffcb00;
-    
+
     box-shadow: 0px 2px 16px 4px rgba(0, 0, 0, 0.36);
     -webkit-box-shadow: 0px 2px 16px 4px rgba(0, 0, 0, 0.36);
     -moz-box-shadow: 0px 2px 16px 4px rgba(0, 0, 0, 0.36);

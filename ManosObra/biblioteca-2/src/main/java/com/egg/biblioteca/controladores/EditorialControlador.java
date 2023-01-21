@@ -17,22 +17,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/editorial") // @RequestMapping("/editorial") = Configura la URL de clase controladora
 public class EditorialControlador { // localhost:8080/autor
 
-  @Autowired  // @Autowired = Inyección de dependencias, vincula al JPA
+  @Autowired // @Autowired = Inyección de dependencias, vincula al JPA
   private EditorialServicio editorialServicio;
 
-  @GetMapping("/registrar") // @GetMapping("/registrar") = Se accede a travez de una operación GET de HTTP
+  /*
+   * MÉTODO CREAR EDITORIALES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
+
+  @GetMapping("/registrar") // @GetMapping = Se accede a travez de una operación GET de HTTP
   public String registrar() { // localhost:8080/editorial/registrar
 
     return "editorial_form.html"; // Retorna un String "archivo.html" que debo crear dentro de resources/templates
   }
 
-  @PostMapping("/registro") // @PostMapping("/registro") = Se accede al action de HTML a travez de un método POST
-  
-   // Método registro = Recibe parámetro llamado igual que atributo name de INPUT de HTML
-  
+  @PostMapping("/registro") // @PostMapping = Se accede al action de HTML a travez de un método POST
   public String registro(@RequestParam String nombre, ModelMap modelo) {
-    // @RequestParam = Indica a controlador que el parámetro viaja en la URL y se ejecuta cuando se llene formulario
-    // ModelMap = Inserta toda la información que vamos a mostrar en interface del usuario
+    // Método registro = Recibe parámetro llamado igual q atributo name de INPUT de HTML
+    // @RequestParam = Indica a controlador q parámetro viaja en la URL y se ejecuta cuando llene formulario
+    // ModelMap = Inserta información q vamos a mostrar en interface del usuario
 
     try {
       editorialServicio.crearEditorial(nombre);
@@ -51,6 +53,10 @@ public class EditorialControlador { // localhost:8080/autor
     return "index.html"; // Si no hay error, muestra el index
   }
 
+  /*
+   * MÉTODO LISTAR EDITORIALES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
+
   @GetMapping("/lista")
   public String listar(ModelMap modelo) {
 
@@ -61,6 +67,10 @@ public class EditorialControlador { // localhost:8080/autor
     return "editorial_list.html";
   }
 
+  /*
+   * MÉTODO MODIFICAR EDITORIALES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
+
   @GetMapping("/modificar/{id}")
   public String modificar(@PathVariable String id, ModelMap modelo) {
     modelo.put("editorial", editorialServicio.getOne(id));
@@ -68,23 +78,31 @@ public class EditorialControlador { // localhost:8080/autor
     return "editorial_modificar.html";
   }
 
-@PostMapping("/modificar/{id}")
+  @PostMapping("/modificar/{id}")
   public String modificar(@PathVariable String id, @RequestParam String nombre, ModelMap modelo) {
     try {
-  
-      editorialServicio.modificarEditorial(id,nombre );
+
+      editorialServicio.modificarEditorial(id, nombre);
 
       return "redirect:../lista";
     } catch (MiException ex) {
       modelo.put("error", ex.getMessage());
-      return "autor_modificar.html";
+      return "editorial_modificar.html";
     }
   }
 
-  // @GetMapping("{id}")
-  public String eliminar(@PathVariable String id, ModelMap modelo) throws MiException {
-    editorialServicio.eliminar(id);
+  /*
+   * MÉTODO ELIMINAR EDITORIALES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
 
-    return "autor_modificar.html";
+  @GetMapping("/eliminar/{id}")
+  public String eliminar(@PathVariable String id, ModelMap modelo) {
+    try {
+      editorialServicio.eliminarEditorial(id);
+
+    } catch (MiException e) {
+      modelo.put("error", e.getMessage());
+    }
+    return "redirect:/editorial/lista";
   }
 }

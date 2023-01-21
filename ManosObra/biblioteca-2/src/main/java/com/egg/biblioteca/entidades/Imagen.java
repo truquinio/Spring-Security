@@ -3,6 +3,7 @@ package com.egg.biblioteca.entidades;
 import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +24,9 @@ public class Imagen {
 
   private String nombre;
 
+  
   @Lob // Lob = informa a Spring q archivo puede ser pesado
+  @Column(columnDefinition="LONGBLOB")
   @Basic(fetch = FetchType.LAZY) // @Basic fecth = FetchType.LAZY (perezosa) = contenido carga sólo con GET
   private byte[] contenido; // byte = forma en q se guarda el contenido de la img
 

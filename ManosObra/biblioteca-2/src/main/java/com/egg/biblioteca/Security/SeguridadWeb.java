@@ -18,36 +18,6 @@ public class SeguridadWeb {
   public UsuarioServicio usuarioServicio;
 
   /*
-   * @Bean
-   * public UserDetailsService userDetailsService(BCryptPasswordEncoder
-   * bCryptPasswordEncoder) {
-   * InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-   * manager.createUser(User.withUsername("email")
-   * .password(bCryptPasswordEncoder.encode("password"))
-   * .roles("USER")
-   * .build());
-   * manager.createUser(User.withUsername("email")
-   * .password(bCryptPasswordEncoder.encode("password"))
-   * .roles("USER", "ADMIN")
-   * .build());
-   * return manager;
-   * }
-   */
-
-  /*
-   * @Bean
-   * public AuthenticationManager authenticationManager(HttpSecurity http,
-   * BCryptPasswordEncoder bCryptPasswordEncoder, UserDetailService
-   * userDetailService)
-   * throws Exception {
-   * return http.getSharedObject(AuthenticationManagerBuilder.class)
-   * .userDetailsService(usuarioServicio)
-   * .passwordEncoder(new BCryptPasswordEncoder())
-   * .build();
-   * }
-   */
-
-  /*
    * CONFIGURAR AUTENTICACIÓN >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
   @Autowired
@@ -72,7 +42,7 @@ public class SeguridadWeb {
     http
         .authorizeHttpRequests()
         // Condiciono toda la clase ADMIN para que solo ADMIN pueda acceder
-        .requestMatchers("/admin/*").hasRole("ADMIN") 
+        .requestMatchers("/admin/*").hasRole("ADMIN")
         .requestMatchers("/css/*", "/js/*", "/img/*", "/**")
         .permitAll()
 

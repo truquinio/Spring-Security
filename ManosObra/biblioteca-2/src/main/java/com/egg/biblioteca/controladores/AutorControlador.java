@@ -16,25 +16,27 @@ import com.egg.biblioteca.excepciones.MiException;
 import com.egg.biblioteca.servicios.AutorServicio;
 
 @Controller // @Controller = Indica al framework de Spring que la clase es tipo controladora
-@RequestMapping("/autor") // @RequestMapping("/autor") = Configura la URL de clase controladora
+@RequestMapping("/autor") // @RequestMapping = Configura la URL de clase controladora
 public class AutorControlador { // localhost:8080/autor
 
   @Autowired // @Autowired = Inyección de dependencias, vincula al JPA
   private AutorServicio autorServicio;
 
-  @GetMapping("/registrar") // @GetMapping("/registrar") = Se accede a travez de una operación GET de HTTP
+    /*
+   * MÉTODO CREAR AUTOR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
+
+  @GetMapping("/registrar") // @GetMapping = Se accede a travez de una operación GET de HTTP
   public String registrar() { // localhost:8080/autor/registrar
 
     return "autor_form.html"; // Retorna un String "archivo.html" que debo crear dentro de resources/templates
   }
 
-  @PostMapping("/registro") // @PostMapping("/registro") = Se accede al action de HTML a travez de un método POST
-
-  // Método registro = Recibe parámetro llamado igual que atributo name de INPUT de HTML
-
+  @PostMapping("/registro") // @PostMapping = Se accede al action de HTML a travez de un método POST
   public String registro(@RequestParam String nombre, ModelMap modelo) {
-    // @RequestParam = Indica a controlador que el parámetro viaja en la URL y se ejecuta cuando se llene formulario
-    // ModelMap = Inserta toda la información que vamos a mostrar en interface del usuario
+    // Método registro = Recibe parámetro llamado igual q atributo name de INPUT de HTML
+    // @RequestParam = Indica a controlador q parámetro viaja en la URL y se ejecuta cuando llene formulario
+    // ModelMap = Inserta información q vamos a mostrar en interface del usuario
 
     // System.out.println("Nombre: " + nombre);
 
@@ -55,6 +57,10 @@ public class AutorControlador { // localhost:8080/autor
     }
   }
 
+    /*
+   * MÉTODO LISTAR AUTOR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
+
   @GetMapping("/lista")
   public String listar(ModelMap modelo) {
 
@@ -64,6 +70,10 @@ public class AutorControlador { // localhost:8080/autor
 
     return "autor_list.html";
   }
+
+    /*
+   * MÉTODO MODIFICAR AUTOR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
 
   @GetMapping("/modificar/{id}")
   public String modificar(@PathVariable String id, ModelMap modelo) {
@@ -89,10 +99,19 @@ public class AutorControlador { // localhost:8080/autor
     }
   }
 
-  // @GetMapping("{id}")
-  public String eliminar(@PathVariable String id, ModelMap modelo) throws MiException {
-    autorServicio.eliminarAutor(id);
+  /*
+   * MÉTODO ELIMINAR AUTOR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
 
-    return "autor_modificar.html";
+  @GetMapping("/eliminar/{id}")
+  public String eliminar(@PathVariable String id, ModelMap modelo) {
+
+    try {
+      autorServicio.eliminarAutor(id);
+
+    } catch (MiException e) {
+      modelo.put("error", e.getMessage());
+    }
+    return "redirect:/autor/lista";
   }
 }

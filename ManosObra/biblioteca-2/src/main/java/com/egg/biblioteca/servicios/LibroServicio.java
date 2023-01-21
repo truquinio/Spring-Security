@@ -138,7 +138,19 @@ public class LibroServicio {
     }
   }
 
-  // MÉTODO getOne = Trae primer resultado de database que coincida con id
+  /*
+   * MÉTODO ELIMINAR LIBRO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
+  @Transactional
+  public void eliminarLibro(Long id) throws MiException {
+    Libro libro = libroRepositorio.getById(id);
+    libroRepositorio.delete(libro);
+  }
+
+  /*
+   * MÉTODO getOne >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   * Trae primer resultado de database que coincida con id
+   */
   public Libro getOne(Long isbn) {
     return libroRepositorio.getOne(isbn);
   }

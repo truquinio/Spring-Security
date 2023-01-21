@@ -1,0 +1,21 @@
+<!-- th:if="${exito != null}" = Tag de Thymeleaf + condición -->
+<div th:if="${exito}!=null" class="card text-white bg-success mb-3 mt-3" id="exito">
+  <div class="card-body">
+    <h5 class="card-title">Exito! 👍</h5>
+
+    <!-- Llamo a la llave ${ modelo.put("exito", exception.getMessage()); } desde clase AutorControlador -->
+    <p class="card-text" th:text="${exito}"></p>
+  </div>
+</div>
+
+<!-- th:if="${error != null}" = Tag de Thymeleaf + condición -->
+<div th:if="${error}!=null" class="card text-white bg-danger mb-3" id="error">
+  <!-- Llamo a la llave ${ modelo.put("error", exception.getMessage()); } desde clase AutorControlador -->
+
+  <div class="card-body">
+    <h5 class="card-title">Error 👎</h5>
+
+    <!-- Llamo a la llave ${ modelo.put("error", exception.getMessage()); } desde clase AutorControlador -->
+    <p class="card-text" th:text="${error}"></p>
+  </div>
+</div>

@@ -1,10 +1,13 @@
 #footer {
-  position: relative;
-  bottom: 47px;
+  position: absolute;
+  bottom: 10px;
 
   color: #598195;
+  background: #fff;
 
   height: auto;
+  width: 100%;
+
   padding: 30px 0 0 0;
   box-shadow: 0px -16px 16px -16px rgba(0, 0, 0, 0.36);
 }
