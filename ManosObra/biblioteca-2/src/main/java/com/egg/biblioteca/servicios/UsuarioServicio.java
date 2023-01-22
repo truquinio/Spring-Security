@@ -74,7 +74,7 @@ public class UsuarioServicio implements UserDetailsService {
   }
 
   /*
-   * MÉTODO ACTUALIZAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   * MÉTODO ACTUALIZAR USUARIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
   @Transactional
@@ -86,49 +86,45 @@ public class UsuarioServicio implements UserDetailsService {
     // Busco usuario x Id
     Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
 
-    // Valido si está presente
-    if (respuesta.isPresent()) {
+      // Valido si está presente
+      if (respuesta.isPresent()) {
 
-      // Reemplazo objeto Usuario con respuesta del Optional
-      Usuario usuario = respuesta.get();
+        // Reemplazo objeto Usuario con respuesta del Optional
+        Usuario usuario = respuesta.get();
 
-      // Seteo ATTR de usuario
-      usuario.setNombre(nombre);
-      usuario.setEmail(email);
+        // Seteo ATTR de usuario
+        usuario.setNombre(nombre);
+        usuario.setEmail(email);
 
-      // Encripto el password
-      usuario.setPassword(new BCryptPasswordEncoder().encode(password));
+        // Encripto el password
+        usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 
-      // Seteo el ROL
-      usuario.setRol(Rol.USER);
+        // Seteo el ROL
+        usuario.setRol(Rol.USER);
 
-      // Antes de guardar creo variable q guarda idImagen
-      String idImagen = null; // null para q no de error
+        // Antes de guardar creo variable q guarda idImagen
+        String idImagen = null; // null para q no de error
 
-      // Valido si img de Usuario existe
-      if (usuario.getImagen() != null) {
+        // Valido si img de Usuario existe
+        if (usuario.getImagen() != null) {
 
-        // Guardo en idImagen el id de la img q ya trae el usuario
-        idImagen = usuario.getImagen().getId();
-      }
+          // Guardo en idImagen el id de la img q ya trae el usuario
+          idImagen = usuario.getImagen().getId();
+        }
 
-      // Instancio objeto imagen y la actualizo (recibo archivo + id)
-      Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+        // Instancio objeto imagen y la actualizo (recibo archivo + id)
+        Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
 
-      // Seteo la img al usuario
-      usuario.setImagen(imagen);
+        // Seteo la img al usuario
+        usuario.setImagen(imagen);
 
-      // Persisto / guardo el usuario en Base de Datos
-      usuarioRepositorio.save(usuario);
+        // Persisto / guardo el usuario en Base de Datos
+        usuarioRepositorio.save(usuario);
     }
   }
 
-  public Usuario getOne(String id) {
-    return usuarioRepositorio.getOne(id);
-  }
-
   /*
-   * LISTAR USUARIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   * MÉTODO LISTAR USUARIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
   @Transactional(readOnly = true)
@@ -142,7 +138,7 @@ public class UsuarioServicio implements UserDetailsService {
   }
 
   /*
-   * CAMBIAR ROL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   * MÉTODO CAMBIAR ROL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
   @Transactional
@@ -171,24 +167,27 @@ public class UsuarioServicio implements UserDetailsService {
   private void validar(String nombre, String email, String password, String password2) throws MiException {
 
     if (nombre.isEmpty() || nombre == null) {
-      throw new MiException("El nombre no puede estar nulo/vacío");
+        throw new MiException("el nombre no puede ser nulo o estar vacío");
     }
     if (email.isEmpty() || email == null) {
-      throw new MiException("El e-mail no puede estar nulo/vacío");
+        throw new MiException("el email no puede ser nulo o estar vacio");
     }
     if (password.isEmpty() || password == null || password.length() <= 5) {
-      throw new MiException("La contraseña no puede estar nulo/vacío y debe tener más de 5 dígitos");
+        throw new MiException("La contraseña no puede estar vacía, y debe tener más de 5 dígitos");
     }
+
     if (!password.equals(password2)) {
-      throw new MiException("Las contraseñas ingresadas deben ser iguales");
+        throw new MiException("Las contraseñas ingresadas deben ser iguales");
     }
-  }
+}
+
 
   /*
    * MÉTODO CARGAR x NOMBRE USUARIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
-  // Sobrescribo método Abstracto x implements UserDetailsService en class UsuarioServicio
+  // Sobrescribo método Abstracto x implements UserDetailsService en class
+  // UsuarioServicio
   @Override
   // loadUserByUsername = Carga usuario por nombre de usuario (email)
   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -227,5 +226,22 @@ public class UsuarioServicio implements UserDetailsService {
 
       return null;
     }
+  }
+
+  /*
+   * MÉTODO ELIMINAR USUARIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
+  @Transactional
+  public void eliminarUsuario(String id) throws MiException {
+    Usuario usuario = usuarioRepositorio.getById(id);
+    usuarioRepositorio.delete(usuario);
+  }
+
+  /*
+   * MÉTODO getOne >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   * Trae primer resultado de database que coincida con id
+   */
+  public Usuario getOne(String id) {
+    return usuarioRepositorio.getOne(id);
   }
 }

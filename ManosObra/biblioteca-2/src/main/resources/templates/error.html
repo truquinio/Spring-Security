@@ -10,35 +10,25 @@
   <!-- NAVBAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
   <header th:replace="fragments/navbar :: header"></header>
 
+
   <main id="main">
-    <!-- TEXTO DEL INDEX >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
     <section class="contenedorMain">
       <div class="tituloBiblioteca">
-        <h1>BIBLIOTECA EGG</h1>
+        <h1><a class="navbar-brand" th:text="'Error ' + ${codigo}">ACÁ SE MUESTRA EL ERROR</a></h1>
+        <p class="tituloLibros" th:text="${mensaje}"></p>
+
       </div>
-      
-
-      <!-- FOTO PERFIL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-      <div class="imgPerfil">
-        <a th:if="${session.usuariosession.imagen != null}" class="d-flex align-items-center">
-          <img class="logo" id="imgPerfil" th:src="@{/imagen/perfil/__${session.usuariosession.id}__}">
-        </a>
-      </div>
-
-
-      <!-- TEXTO BIENVENIDA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-      <div class="container contenedorLibros">
-        <!-- Valido si Usuario está logueado, muestra msj saludo + nombre de Usuario -->
-        <p class="tituloLibros" th:if="${session.usuariosession != null}"
-          th:text="'¡Hola de vuelta ' + ${session.usuariosession.nombre} + '!'"></p>
-        <!-- <p class="tituloLibros" th:if="${session.usuariosession != null}" th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre} "></p> -->
-        
-
-        <!-- BOTÓN AMARILLO DEL INDEX >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-        <div>
-          <a href=/libro/lista><button type="submit" class="btn btn-primary mt-3" id="boton">Ver Listado</button></a>
-          <!-- <a href=/libro/lista class="btn btn-xl mt-2 boton" id="boton">Ver Listado</a> -->
+      <section class="text-center container">
+        <div class="row mt-3">
+          <div class="divVolver">
+            <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+          </div>
         </div>
+      </section>
+      <div class="container contenedorLibros">
+        <p class="tituloLibros" th:if="${session.usuariosession != null}"
+          th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre} "></p>
+
       </div>
     </section>
   </main>

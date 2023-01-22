@@ -12,6 +12,8 @@ body {
 
 body {
     min-height: 100vh;
+
+    color: #11434d;
 }
 
 #main {
@@ -33,10 +35,9 @@ body {
 .tituloBiblioteca {
     margin-top: 150px;
 
-    color: #37474f;
+    color: #11434d;
     text-align: center;
 
-    font-size: 200px;
     line-height: normal;
     font-weight: bolder;
 
@@ -51,7 +52,7 @@ body {
 }
 
 .contenedorLibros {
-    color: #37474f;
+    color: #11434d;
     margin-top: 80px;
     display: flex;
     flex-direction: column;

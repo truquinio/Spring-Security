@@ -10,13 +10,22 @@
   <header th:replace="fragments/navbar :: header"></header>
 
   <main id="main2">
+
+    <!-- EXITO / ERROR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+    <div th:replace="fragments/exitoError :: div"></div>
+    </div>
+
+    <!-- MENSAJE por si no está LOGUEADO -->
+    <div  th:replace="fragments/login :: div"></div>
+    
     <!-- FORMULARIO EDITORIAL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-    <div class="container-fluid m-5 contenedor">
+    <div sec:authorize="hasRole('ADMIN')" class="container-fluid m-5 contenedor">
+      <!-- sec:authorize="hasRole('ADMIN') = Sólo rol ADMIN puede acceder al formulario -->
 
       <form class="formulario" th:action="@{/editorial/registro}" method="POST">
         <div class="form-group my-3">
           <label class="mb-2">Cargar Editorial</label>
-          <input type="text" class="form-control" name="nombre" placeholder="Nombre de la Editorial">
+          <input type="text" class="form-control" name="nombre" placeholder="Nombre de la Editorial" required>
         </div>
 
         <!-- BOTÓN GUARDAR  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
@@ -40,8 +49,8 @@
   <!--	DARK MODE  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
   <script src="/js/toggle.js"></script>
 
-  <!--	SCRIP de BOOTSTRAP v5.2  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-  <script th:replace="fragments/scriptBootstrap :: script"></script>
+  <!--	SCRIP de BOOTSTRAP v5.3  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+  <script th:replace="fragments/bootstrap :: script"></script>
 
 </body>
 </html>

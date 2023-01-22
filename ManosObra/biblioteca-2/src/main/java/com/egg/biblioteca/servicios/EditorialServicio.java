@@ -93,7 +93,7 @@ public class EditorialServicio {
   }
 
   /*
-   * ÉTODO getOne >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   * MÉTODO getOne >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    * Trae primer resultado de database que coincida con id
    */
   public Editorial getOne(String id) {

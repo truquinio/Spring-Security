@@ -1,7 +1,7 @@
 #boton{
-  width: auto;
+  width: 150px;
 
-  color: #37474f;
+  color: #11434d;
   background-color: #ffcb00;
   border: none;
 
@@ -100,6 +100,20 @@
 #divVolver1 {
   position: absolute;
   top: 75%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+
+  box-sizing: border-box;
+  
+  margin: 0;
+  padding: 0;
+
+  background: transparent;
+}
+
+#divVolver2 {
+  position: absolute;
+  top: 82%;
   left: 45%;
   transform: translate(-50%, -50%);
 

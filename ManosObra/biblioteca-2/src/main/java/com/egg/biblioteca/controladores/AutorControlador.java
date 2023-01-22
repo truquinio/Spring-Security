@@ -22,7 +22,7 @@ public class AutorControlador { // localhost:8080/autor
   @Autowired // @Autowired = Inyección de dependencias, vincula al JPA
   private AutorServicio autorServicio;
 
-    /*
+  /*
    * MÉTODO CREAR AUTOR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
@@ -34,8 +34,10 @@ public class AutorControlador { // localhost:8080/autor
 
   @PostMapping("/registro") // @PostMapping = Se accede al action de HTML a travez de un método POST
   public String registro(@RequestParam String nombre, ModelMap modelo) {
-    // Método registro = Recibe parámetro llamado igual q atributo name de INPUT de HTML
-    // @RequestParam = Indica a controlador q parámetro viaja en la URL y se ejecuta cuando llene formulario
+    // Método registro = Recibe parámetro llamado igual q atributo name de INPUT de
+    // HTML
+    // @RequestParam = Indica a controlador q parámetro viaja en la URL y se ejecuta
+    // cuando llene formulario
     // ModelMap = Inserta información q vamos a mostrar en interface del usuario
 
     // System.out.println("Nombre: " + nombre);
@@ -57,7 +59,7 @@ public class AutorControlador { // localhost:8080/autor
     }
   }
 
-    /*
+  /*
    * MÉTODO LISTAR AUTOR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
@@ -71,13 +73,13 @@ public class AutorControlador { // localhost:8080/autor
     return "autor_list.html";
   }
 
-    /*
+  /*
    * MÉTODO MODIFICAR AUTOR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
   @GetMapping("/modificar/{id}")
   public String modificar(@PathVariable String id, ModelMap modelo) {
-    
+
     modelo.put("autor", autorServicio.getOne(id));
 
     return "autor_modificar.html";
@@ -86,11 +88,11 @@ public class AutorControlador { // localhost:8080/autor
   @PostMapping("/modificar/{id}")
   public String modificar(@PathVariable String id, @RequestParam String nombre, ModelMap modelo) {
     try {
-  
-      autorServicio.modificarAutor(id,nombre );
+
+      autorServicio.modificarAutor(id, nombre);
 
       return "redirect:../lista";
-      
+
     } catch (MiException ex) {
 
       modelo.put("error", ex.getMessage());

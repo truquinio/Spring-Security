@@ -35,3 +35,21 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+.msjLogueate{
+    position: absolute;
+    top: 25%;
+    left: 50%;
+
+    transform: translate(-25%, -50%);
+
+    width: 100%;
+
+    color: #11434d;
+
+    text-shadow: 4px 3px 3px #11434d24;
+}
+
+.msjLogueate text{
+    color: #fccd06;
+}

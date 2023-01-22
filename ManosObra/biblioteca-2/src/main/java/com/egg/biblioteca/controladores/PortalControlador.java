@@ -5,6 +5,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +25,7 @@ public class PortalControlador { // localhost:8080/
   private UsuarioServicio usuarioServicio;
 
   /*
-   * INDEX  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   * INDEX >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
   @GetMapping("/") // @GetMapping("/") = Se accede a travez de una operación GET de HTTP
@@ -93,7 +94,7 @@ public class PortalControlador { // localhost:8080/
     // Si nos llega un error
     if (error != null) {
 
-      modelo.put("error", "Usuario o contraseña inválidos!");
+      modelo.put("error", "¡Usuario o contraseña inválidos!");
     }
     return "login.html";
   }
@@ -126,8 +127,55 @@ public class PortalControlador { // localhost:8080/
       return "inicio.html";
 
     } catch (Exception e) {
+      // return "inicio.html";
 
-      return "login.html";
+      // En caso de NO estar logueado, lleva al LOGIN
+      return "redirect:/login";
+    }
+  }
+
+  /*
+   * MÉTODO PERFIL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   * Recupero datos de sesión del usuario
+   */
+
+  @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+  @GetMapping("/perfil")
+  public String perfil(ModelMap modelo, HttpSession session) {
+
+    // Instancio un usuario y guardo todos los datos de la sesión
+    Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+
+    // Con modelo pongo los datos para q se autocomplete el form
+    modelo.put("usuario", usuario);
+
+    return "usuario_modificar.html";
+  }
+
+  /*
+   * MÉTODO ACTUALIZAR USUARIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
+
+  @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+  @PostMapping("/perfil/{id}")
+  public String actualizar(MultipartFile archivo, @PathVariable String id, @RequestParam String nombre,
+      @RequestParam String email,
+      @RequestParam String password, @RequestParam String password2, ModelMap modelo) {
+
+    try {
+      usuarioServicio.actualizar(archivo, id, nombre, email, password, password2);
+
+      modelo.put("exito", "Usuario actualizado correctamente!");
+
+      return "inicio.html";
+      
+    } catch (MiException ex) {
+
+      modelo.put("error", ex.getMessage());
+      modelo.put("nombre", nombre);
+      modelo.put("email", email);
+
+      return "usuario_modificar.html";
     }
   }
 }

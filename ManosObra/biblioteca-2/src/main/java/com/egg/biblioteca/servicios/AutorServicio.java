@@ -26,7 +26,7 @@ public class AutorServicio {
    * MÉTODO CREAR AUTORES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
-  @Transactional // @Transactional = Si falla modificación en database hace rollback, no modifica
+  @Transactional // @Transactional = Si falla modificación en database hace rollback, no modifica
   public void crearAutor(String nombre) throws MiException {
 
     // validarNombre, desde ValidacionServicio

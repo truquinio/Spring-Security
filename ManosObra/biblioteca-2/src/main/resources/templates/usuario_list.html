@@ -3,6 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <!-- <etiqueta-Padre th:replace = "/Carpeta-Plantilla/etiqueta-hijo :: etiqueta-Padre"></etiqueta-Padre> -->
+
 <head th:replace="/fragments/head2 :: head"></head>
 
 <body>
@@ -18,41 +19,45 @@
     <!-- MENSAJE por si no está LOGUEADO -->
     <div  th:replace="fragments/login :: div"></div>
 
-    <!-- TABLA LIBROS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-    <div sec:authorize="hasAnyRole('ADMIN','USER')" class="container m-5">
-      <!-- sec:authorize="hasAnyRole('ADMIN', USER) = Sólo logueados pueden ver a la TABLA -->
+    <!-- TABLA USUARIOS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+    <div sec:authorize="hasRole('ADMIN')" class="container m-5">
+      <!-- sec:authorize="hasRole('ADMIN') = Sólo rol ADMIN puede acceder a la TABLA -->
 
-      <table class="table table-dark" id="tabla2">
-        <thead>
+      <table class="table table-dark" id="tabla3">
+        <thead class="align-items-center">
           <tr>
-            <th scope="col">ISBN</th>
-            <th scope="col">Titulo</th>
-            <th scope="col">Ejemplares</th>
-            <th scope="col">Autor</th>
-            <th scope="col">Editorial</th>
+            <th scope="col">id</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Foto</th>
 
             <!-- sec:authorize="hasRole('ADMIN')" = Condiciono q columna acciones sólo se vea siendo ADMIN -->
-            <th scope="col" sec:authorize="hasRole('ADMIN')">Acciones</th>
+            <th scope="col" >Acciones</th>
 
           </tr>
         </thead>
-        <tbody th:each="libro : ${libros}">
+        <tbody th:each="usuario : ${usuarios}">
           <tr>
-            <th scope="row" th:text="${libro.isbn}"></th>
-            <td th:text="${libro.titulo}"></td>
-            <td th:text="${libro.ejemplares}"></td>
-            <td th:text="${libro.autor.nombre}"></td>
-            <td th:text="${libro.editorial.nombre}"></td>
-
-            <td sec:authorize="hasRole('ADMIN')">
-
-              <a th:href="@{/libro/modificar/__${libro.isbn}__}"><i class="bi bi-pen"></i>Modificar</a>
-              <a th:href="@{/libro/eliminar/__${libro.isbn}__}"><i class="bi bi-trash"></i>Eliminar</a>
+            <th scope="row" th:text="${usuario.id}"></th>
+            <td th:text="${usuario.nombre}"></td>
+            <td th:text="${usuario.rol}"></td>
+            <td <a><img th:if="${usuario.imagen != null}" class="fotoUser" th:src="@{/imagen/perfil/__${usuario.id}__}"></a>
             </td>
+
+            <td>
+              <a th:href="@{/admin/modificarRol/__${usuario.id}__}"><i class="bi bi-pen"></i>Cambiar Rol</a>
+              <a th:href= "@{/usuario/modificar/__${usuario.id}__}"><i class="bi bi-pen"></i>Modificar</a>
+              <a th:href="@{/usuario/eliminar/__${usuario.id}__}"><i class="bi bi-trash"></i>Eliminar</a>
+            </td>
+
           </tr>
 
         </tbody>
       </table>
+
+      <!-- EXITO / ERROR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+      <div th:replace="fragments/exitoError :: div"></div>
+    </div>
 
     <!-- BOTÓN VOLVER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
     <div id="divVolver1">

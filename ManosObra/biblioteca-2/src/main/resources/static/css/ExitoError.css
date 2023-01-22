@@ -1,7 +1,10 @@
 #exito {
+    /* z-index: 11 = A mayor valor más arriba se representa el elemento. */
+    z-index: 9;
+
     position: absolute;
     top: 15%;
-    left: 50%;
+    left:50%;
     transform: translate(-50%, -50%);
 
     margin: 0%;
@@ -14,7 +17,7 @@
 
 #error {
     position: absolute;
-    top: 15%;
+    top: 17%;
     left: 50%;
     transform: translate(-50%, -50%);
 

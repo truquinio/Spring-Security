@@ -8,7 +8,34 @@
 
 <body>
   <!-- NAVBAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-  <header th:replace="fragments/navbar :: header"></header>
+  <header>
+    <nav class="navbar navbar-expand-lg navBar" id="navbar">
+      <div class="containerImg">
+        <a href="/" class="navbar-brand d-flex align-items-center">
+          <img class="logo" src="/img/Egg.png" alt="Img logo egg">
+        </a>
+      </div>
+  
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+  
+      <!-- CREAR y LISTAR LIBROS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+      <div class="collapse navbar-collapse elementosNav" id="desplegables">
+  
+        <ul class="navbar-nav ms-auto elementos">
+  
+          <!-- th:if="${session.usuariosession == null} / Sólo muestra los botones si NO está logueado -->
+          <li th:if="${session.usuariosession == null}" class="nav-item">
+            <a class="nav-link " href="/registrar" id="lista1" role="button" aria-expanded="false">📝 Registrate!
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
   <main id="main2">
     <!-- EXITO / ERROR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
@@ -47,8 +74,8 @@
   <!--	DARK MODE  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
   <script src="/js/toggle.js"></script>
 
-  <!--	SCRIP de BOOTSTRAP v5.2  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-  <script th:replace="fragments/scriptBootstrap :: script"></script>
+  <!--	SCRIP de BOOTSTRAP v5.3  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+  <script th:replace="fragments/bootstrap :: script"></script>
 
 </body>
 

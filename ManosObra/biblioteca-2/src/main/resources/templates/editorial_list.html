@@ -10,10 +10,19 @@
   <header th:replace="fragments/navbar :: header"></header>
 
   <main id="main2">
-    <!-- TABLA EDITORIALES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-    <div class="container m-5">
 
-      <table class="table table-dark">
+    <!-- EXITO / ERROR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+    <div th:replace="fragments/exitoError :: div"></div>
+    </div>
+
+    <!-- MENSAJE por si no está LOGUEADO -->
+    <div  th:replace="fragments/login :: div"></div>
+
+    <!-- TABLA EDITORIALES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+    <div sec:authorize="hasAnyRole('ADMIN','USER')" class="container m-5">
+      <!-- sec:authorize="hasAnyRole('ADMIN', USER) = Sólo logueados pueden ver a la TABLA -->
+
+      <table class="table table-dark" id="tabla">
         <thead>
           <tr>
             <th scope="col">Id de la Editorial</th>
@@ -38,10 +47,6 @@
         </tbody>
       </table>
 
-      <!-- EXITO / ERROR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-      <div th:replace="fragments/exitoError :: div"></div>
-    </div>
-
     <!-- BOTÓN VOLVER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
     <div id="divVolver1">
       <section th:replace="fragments/volver :: section"></section>
@@ -55,8 +60,8 @@
   <!--	DARK MODE  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
   <script src="/js/toggle.js"></script>
 
-  <!--	SCRIP de BOOTSTRAP v5.2  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-  <script th:replace="fragments/scriptBootstrap :: script"></script>
+  <!--	SCRIP de BOOTSTRAP v5.3  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+  <script th:replace="fragments/bootstrap :: script"></script>
 
 </body>
 

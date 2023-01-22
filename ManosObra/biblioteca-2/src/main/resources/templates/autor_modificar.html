@@ -3,15 +3,25 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <!-- <etiqueta-Padre th:replace = "/Carpeta-Plantilla/etiqueta-hijo :: etiqueta-Padre"></etiqueta-Padre> -->
-<head th:replace = "/fragments/head2 :: head"></head>
+
+<head th:replace="/fragments/head2 :: head"></head>
 
 <body>
   <!-- NAVBAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
   <header th:replace="fragments/navbar :: header"></header>
 
   <main id="main2">
+
+    <!-- EXITO / ERROR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+    <div th:replace="fragments/exitoError :: div"></div>
+    </div>
+
+    <!-- MENSAJE por si no está LOGUEADO -->
+    <div  th:replace="fragments/login :: div"></div>
+
     <!-- MODIFICAR AUTOR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-    <div class="container-fluid m-5 contenedor">
+    <div sec:authorize="hasRole('ADMIN')" class="container-fluid m-5 contenedor">
+      <!-- sec:authorize="hasRole('ADMIN') = Sólo rol ADMIN puede acceder al formulario -->
 
       <!--  action = Se dispara la acción al servidor y se ejecuta en una URL (/autor/registro) y ocurre en una petición del tipo POST  -->
       <form class="formulario" th:action="@{/autor/modificar/__${autor.id}__}" method="POST">
@@ -21,7 +31,7 @@
           <label class="mb-2">Cargar Autores</label>
 
           <!-- Este input envía datos encerrados en una variable con un name (debe coincidir con lo que llega como parámetro al controlador) por eso se llama "nombre"  -->
-          <input th:value="${autor.nombre}" type="text" class="form-control" name="nombre">
+          <input th:value="${autor.nombre}" type="text" class="form-control" name="nombre" required>
         </div>
 
         <!-- BOTÓN ACTUALIZAR  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
@@ -29,11 +39,6 @@
           <button type="submit" class="btn btn-primary mt-3 botones" id="botonAmarillo">Actualizar</button>
         </div>
       </form>
-
-
-      <!-- EXITO / ERROR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-      <div th:replace="fragments/exitoError :: div"></div>
-    </div>
 
     <!-- BOTÓN VOLVER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
     <section th:replace="fragments/volver :: section"></section>
@@ -46,8 +51,8 @@
   <!--	DARK MODE  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
   <script src="/js/toggle.js"></script>
 
-  <!--	SCRIP de BOOTSTRAP v5.2  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
-  <script th:replace="fragments/scriptBootstrap :: script"></script>
+  <!--	SCRIP de BOOTSTRAP v5.3  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+  <script th:replace="fragments/bootstrap :: script"></script>
 
 </body>
 </html>

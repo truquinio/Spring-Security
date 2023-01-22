@@ -1,25 +1,3 @@
-.navBar {
-  background-color: #fff !important;
-  size: 100%;
-}
-
-.elementosNav {
-  display: flex;
-  width: 30%;
-  justify-content: space-around;
-  color: #37474f;
-  font-weight: 700;
-}
-
-.containerImg {
-  width: 20%;
-}
-
-.logo {
-  width: 40%;
-  margin: auto;
-}
-
 .main {
   background-image: url(../img/FondoZoom.jpg);
   background-size: cover;
