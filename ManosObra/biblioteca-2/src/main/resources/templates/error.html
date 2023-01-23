@@ -13,9 +13,14 @@
 
   <main id="main">
     <section class="contenedorMain">
+      <div class="container contenedorLibros">
+        <text class="tituloLibros" th:if="${session.usuariosession != null}"
+          th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre} "></text>
+      </div>
+
       <div class="tituloBiblioteca">
-        <h1><a class="navbar-brand" th:text="'Error ' + ${codigo}">ACÁ SE MUESTRA EL ERROR</a></h1>
-        <p class="tituloLibros" th:text="${mensaje}"></p>
+        <h1><a class="navbar-brand" th:text="'⚠️ ' + 'Error ' + ${codigo} + ' ⚠️'">ACÁ SE MUESTRA EL ERROR</a></h1>
+        <p class="tituloLibros" th:text="${mensaje} + '❗️'"></p>
 
       </div>
       <section class="text-center container">
@@ -25,11 +30,6 @@
           </div>
         </div>
       </section>
-      <div class="container contenedorLibros">
-        <p class="tituloLibros" th:if="${session.usuariosession != null}"
-          th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre} "></p>
-
-      </div>
     </section>
   </main>
 

@@ -22,23 +22,23 @@ public class ErroresControlador implements ErrorController {
 
     switch (httpErrorCode) {
       case 400: {
-        errorMsg = "El recurso solicitado no existe.";
+        errorMsg = "El recurso solicitado no existe";
         break;
       }
       case 403: {
-        errorMsg = "No tiene permisos para acceder al recurso.";
+        errorMsg = "No tiene permisos para acceder al recurso";
         break;
       }
       case 401: {
-        errorMsg = "No se encuentra autorizado.";
+        errorMsg = "No se encuentra autorizado";
         break;
       }
       case 404: {
-        errorMsg = "El recurso solicitado no fue encontrado.";
+        errorMsg = "El recurso solicitado no fue encontrado";
         break;
       }
       case 500: {
-        errorMsg = "Ocurrió un error interno.";
+        errorMsg = "Ocurrió un error interno";
         break;
       }
     }
@@ -49,7 +49,7 @@ public class ErroresControlador implements ErrorController {
   }
 
   private int getErrorCode(HttpServletRequest httpRequest) {
-    
+
     // return (Integer) httpRequest.getAttribute("javax.servlet.error.status_code");
     return (Integer) httpRequest.getAttribute("jakarta.servlet.error.status_code");
   }

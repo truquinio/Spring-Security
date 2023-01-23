@@ -233,8 +233,10 @@ public class UsuarioServicio implements UserDetailsService {
    */
   @Transactional
   public void eliminarUsuario(String id) throws MiException {
+    
     Usuario usuario = usuarioRepositorio.getById(id);
-    usuarioRepositorio.delete(usuario);
+    
+    usuarioRepositorio.deleteById(id);;
   }
 
   /*

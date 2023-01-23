@@ -84,9 +84,9 @@
 
           <!-- USUARIOS / LISTAR  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#"
-            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <li sec:authorize="hasRole('ADMIN')" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
             Usuarios
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -96,7 +96,9 @@
         </li>
 
         <!-- ROL USUARIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
-        <li th:if="${session.usuariosession != null}" class="nav-item dropdown" id="desplegables">
+
+        <!--<li  th:if="${session.usuariosession != null}"  class="nav-item dropdown" id="desplegables"> -->
+        <li sec:authorize="hasAnyRole('ADMIN','USER')" class="nav-item dropdown" id="desplegables">
           <a class="nav-link dropdown-toggle" href="#" id="userName" role="button" data-bs-toggle="dropdown"
             aria-expanded="false" th:if="${session.usuariosession != null}" th:text="${session.usuariosession.nombre}">
             <!-- <img class="logo" id="imgPerfil1" th:src="@{/imagen/perfil/__${session.usuariosession.id}__}"> -->
@@ -111,31 +113,31 @@
 
 
             <!-- EDITAR PERFIL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
-              <li><a class="dropdown-item" th:href="@{/perfil}">Editar Perfil</a></li>
-  
-              <li>
-                <hr class="dropdown-divider">
-              </li>
+            <li><a class="dropdown-item" th:href="@{/perfil}">Editar Perfil</a></li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
 
             <!-- CERRAR SESIÓN >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
 
             <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
           </ul>
-          </ul>
-        </li>
+      </ul>
+      </li>
 
 
-          <!-- INGRESAR / REGISTRAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+      <!-- INGRESAR / REGISTRAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
 
-        <li th:if="${session.usuariosession == null}" class="nav-item">
-          <a class="nav-link" href="/login" id="lista1" role="button" aria-expanded="false">✅ Login</a>
-        </li>
+      <li th:if="${session.usuariosession == null}" class="nav-item">
+        <a class="nav-link" href="/login" id="lista1" role="button" aria-expanded="false">✅ Login</a>
+      </li>
 
-        <!-- th:if="${session.usuariosession == null} / Sólo muestra los botones si NO está logueado -->
-        <li th:if="${session.usuariosession == null}" class="nav-item">
-          <a class="nav-link " href="/registrar" id="lista1" role="button" aria-expanded="false">📝 Registrate!
-          </a>
-        </li>
+      <!-- th:if="${session.usuariosession == null} / Sólo muestra los botones si NO está logueado -->
+      <li th:if="${session.usuariosession == null}" class="nav-item">
+        <a class="nav-link " href="/registrar" id="lista1" role="button" aria-expanded="false">📝 Registrate!
+        </a>
+      </li>
 
     </div>
   </nav>

@@ -20,7 +20,7 @@
     <div  th:replace="fragments/login :: div"></div>
 
     <!-- FORMULARIO EDITAR USUARIO  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
-    <div sec:authorize="hasRole('ADMIN')" class="container-fluid m-5 contenedor">
+    <div sec:authorize="hasAnyRole('ADMIN', 'USER')" class="container-fluid m-5 contenedor">
       <!-- sec:authorize="hasRole('ADMIN') = Sólo rol ADMIN puede acceder al formulario -->
 
       <form class="formulario" th:action="@{/perfil/__${usuario.id}__}" method="POST" enctype="multipart/form-data">
