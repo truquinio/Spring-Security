@@ -59,7 +59,6 @@ public class AutorServicio {
   /*
    * MÉTODO MODIFICAR AUTORES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
-  
   @Transactional
   public void modificarAutor(String id, String nombre) throws MiException {
 

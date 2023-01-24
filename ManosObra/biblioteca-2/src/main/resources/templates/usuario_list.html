@@ -28,6 +28,7 @@
           <tr>
             <th scope="col">id</th>
             <th scope="col">Usuario</th>
+            <th scope="col">E-mail</th>
             <th scope="col">Rol</th>
             <th scope="col">Foto</th>
 
@@ -40,16 +41,16 @@
           <tr>
             <th scope="row" th:text="${usuario.id}"></th>
             <td th:text="${usuario.nombre}"></td>
+            <td th:text="${usuario.email}"></td>
             <td th:text="${usuario.rol}"></td>
             <td <a><img th:if="${usuario.imagen != null}" class="fotoUser" th:src="@{/imagen/perfil/__${usuario.id}__}"></a>
             </td>
 
             <td>
               <a th:href="@{/admin/modificarRol/__${usuario.id}__}"><i class="bi bi-person-circle"></i> Cambiar Rol</a>
-              <a th:href= "@{usuario/modificar/__${usuario.id}__}"><i class="bi bi-pen"></i> Modificar</a>
-              <a th:href="@{usuario/eliminar/__${usuario.id}__}"><i class="bi bi-trash"></i> Eliminar</a>
+              <a th:href= "@{/admin/modificar/__${usuario.id}__}"><i class="bi bi-pen"></i> Modificar</a>
+              <a th:href="@{/admin/eliminar/__${usuario.id}__}"><i class="bi bi-trash"></i> Eliminar</a>
             </td>
-
           </tr>
 
         </tbody>

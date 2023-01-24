@@ -11,12 +11,15 @@
   <header th:replace="fragments/navbar :: header"></header>
 
   <main id="main">
+    <!-- EXITO / ERROR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+    <div th:replace="fragments/exitoError :: div"></div>
+
     <!-- TEXTO DEL INDEX >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
     <section class="contenedorMain">
       <div class="tituloBiblioteca">
         <h1>BIBLIOTECA EGG</h1>
       </div>
-      
+
 
       <!-- FOTO PERFIL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
       <div class="imgPerfil">
@@ -32,7 +35,7 @@
         <p class="tituloLibros" th:if="${session.usuariosession != null}"
           th:text="'¡Hola de vuelta ' + ${session.usuariosession.nombre} + '!'"></p>
         <!-- <p class="tituloLibros" th:if="${session.usuariosession != null}" th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre} "></p> -->
-        
+
 
         <!-- BOTÓN AMARILLO DEL INDEX >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
         <div>

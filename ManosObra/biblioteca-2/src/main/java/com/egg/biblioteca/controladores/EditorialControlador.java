@@ -50,7 +50,7 @@ public class EditorialControlador { // localhost:8080/autor
       return "editorial_form.html"; // Si hay error, vuelve a cargar página de formulario
     }
 
-    return "index.html"; // Si no hay error, muestra el index
+    return "panel.html"; // Si no hay error, muestra el index
   }
 
   /*
@@ -71,15 +71,16 @@ public class EditorialControlador { // localhost:8080/autor
    * MÉTODO MODIFICAR EDITORIALES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
-  @GetMapping("/modificar/{id}")
+   @GetMapping("/modificar/{id}")  // GET = Para trabajar con el HTML
   public String modificar(@PathVariable String id, ModelMap modelo) {
     modelo.put("editorial", editorialServicio.getOne(id));
 
     return "editorial_modificar.html";
   }
 
-  @PostMapping("/modificar/{id}")
-  public String modificar(@PathVariable String id, @RequestParam String nombre, ModelMap modelo) {
+  // LO USO PARA EL BOTÓN ACTUALIZAR
+  @PostMapping("/modificar/{id}")  // POST Modifica la base de datos
+  public String modificado(@PathVariable String id, @RequestParam String nombre, ModelMap modelo) {
     try {
 
       editorialServicio.modificarEditorial(id, nombre);
@@ -95,7 +96,7 @@ public class EditorialControlador { // localhost:8080/autor
    * MÉTODO ELIMINAR EDITORIALES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
-  @GetMapping("/eliminar/{id}")
+  @PostMapping("/eliminar/{id}")
   public String eliminar(@PathVariable String id, ModelMap modelo) {
     try {
       editorialServicio.eliminarEditorial(id);

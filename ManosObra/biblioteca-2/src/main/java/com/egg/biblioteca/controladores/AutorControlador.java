@@ -48,7 +48,7 @@ public class AutorControlador { // localhost:8080/autor
       // Si carga todo correctamente, usuario ve mensaje de llave "exito"
       modelo.put("exito", "El autor fue cargado correctamente!");
 
-      return "index.html"; // Si no hay error, muestra el index
+      return "panel.html"; // Si no hay error, muestra el index
 
     } catch (MiException ex) {
 
@@ -77,7 +77,7 @@ public class AutorControlador { // localhost:8080/autor
    * MÉTODO MODIFICAR AUTOR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
-  @GetMapping("/modificar/{id}")
+  @GetMapping("/modificar/{id}")  // GET = Para trabajar con el HTML
   public String modificar(@PathVariable String id, ModelMap modelo) {
 
     modelo.put("autor", autorServicio.getOne(id));
@@ -85,13 +85,14 @@ public class AutorControlador { // localhost:8080/autor
     return "autor_modificar.html";
   }
 
-  @PostMapping("/modificar/{id}")
-  public String modificar(@PathVariable String id, @RequestParam String nombre, ModelMap modelo) {
+  // LO USO PARA EL BOTÓN ACTUALIZAR
+  @PostMapping("/modificar/{id}")  // POST Modifica la base de datos
+  public String modificado(@PathVariable String id, @RequestParam String nombre, ModelMap modelo) {
     try {
 
       autorServicio.modificarAutor(id, nombre);
 
-      return "redirect:../lista";
+      return "redirect:/autor/lista";
 
     } catch (MiException ex) {
 
@@ -105,7 +106,7 @@ public class AutorControlador { // localhost:8080/autor
    * MÉTODO ELIMINAR AUTOR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
-  @GetMapping("/eliminar/{id}")
+  @PostMapping("/eliminar/{id}")
   public String eliminar(@PathVariable String id, ModelMap modelo) {
 
     try {

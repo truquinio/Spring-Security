@@ -22,7 +22,7 @@
     <div sec:authorize="hasRole('ADMIN')" class="container-fluid m-5 contenedor">
       <!-- sec:authorize="hasRole('ADMIN') = Sólo rol ADMIN puede acceder al formulario -->
 
-      <form class="formulario" th:action="@{/libro/modificar/__${libro.isbn}__}" method="POST">
+      <form class="formulario" th:action="@{/libro/modificado/__${libro.isbn}__}" method="POST">
         <input hidden th:value="${isbn}" name="isbn">
 
         <div class="form-group my-3">

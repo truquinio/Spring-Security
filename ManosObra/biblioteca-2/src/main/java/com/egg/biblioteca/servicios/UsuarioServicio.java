@@ -1,6 +1,7 @@
 package com.egg.biblioteca.servicios;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -74,7 +75,7 @@ public class UsuarioServicio implements UserDetailsService {
   }
 
   /*
-   * MÉTODO ACTUALIZAR USUARIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   * MÉTODO ACTUALIZAR PERFIL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
   @Transactional
@@ -86,40 +87,40 @@ public class UsuarioServicio implements UserDetailsService {
     // Busco usuario x Id
     Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario);
 
-      // Valido si está presente
-      if (respuesta.isPresent()) {
+    // Valido si está presente
+    if (respuesta.isPresent()) {
 
-        // Reemplazo objeto Usuario con respuesta del Optional
-        Usuario usuario = respuesta.get();
+      // Reemplazo objeto Usuario con respuesta del Optional
+      Usuario usuario = respuesta.get();
 
-        // Seteo ATTR de usuario
-        usuario.setNombre(nombre);
-        usuario.setEmail(email);
+      // Seteo ATTR de usuario
+      usuario.setNombre(nombre);
+      usuario.setEmail(email);
 
-        // Encripto el password
-        usuario.setPassword(new BCryptPasswordEncoder().encode(password));
+      // Encripto el password
+      usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 
-        // Seteo el ROL
-        usuario.setRol(Rol.USER);
+      // Seteo el ROL
+      usuario.setRol(Rol.USER);
 
-        // Antes de guardar creo variable q guarda idImagen
-        String idImagen = null; // null para q no de error
+      // Antes de guardar creo variable q guarda idImagen
+      String idImagen = null; // null para q no de error
 
-        // Valido si img de Usuario existe
-        if (usuario.getImagen() != null) {
+      // Valido si img de Usuario existe
+      if (usuario.getImagen() != null) {
 
-          // Guardo en idImagen el id de la img q ya trae el usuario
-          idImagen = usuario.getImagen().getId();
-        }
+        // Guardo en idImagen el id de la img q ya trae el usuario
+        idImagen = usuario.getImagen().getId();
+      }
 
-        // Instancio objeto imagen y la actualizo (recibo archivo + id)
-        Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+      // Instancio objeto imagen y la actualizo (recibo archivo + id)
+      Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
 
-        // Seteo la img al usuario
-        usuario.setImagen(imagen);
+      // Seteo la img al usuario
+      usuario.setImagen(imagen);
 
-        // Persisto / guardo el usuario en Base de Datos
-        usuarioRepositorio.save(usuario);
+      // Persisto / guardo el usuario en Base de Datos
+      usuarioRepositorio.save(usuario);
     }
   }
 
@@ -130,7 +131,7 @@ public class UsuarioServicio implements UserDetailsService {
   @Transactional(readOnly = true)
   public List<Usuario> listarUsuarios() {
 
-    List<Usuario> usuarios = new ArrayList();
+    List<Usuario> usuarios = new ArrayList<>();
 
     usuarios = usuarioRepositorio.findAll();
 
@@ -154,6 +155,7 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setRol(Rol.ADMIN);
 
       } else if (usuario.getRol().equals(Rol.ADMIN)) {
+
         usuario.setRol(Rol.USER);
       }
     }
@@ -167,20 +169,19 @@ public class UsuarioServicio implements UserDetailsService {
   private void validar(String nombre, String email, String password, String password2) throws MiException {
 
     if (nombre.isEmpty() || nombre == null) {
-        throw new MiException("el nombre no puede ser nulo o estar vacío");
+      throw new MiException("el nombre no puede ser nulo o estar vacío");
     }
     if (email.isEmpty() || email == null) {
-        throw new MiException("el email no puede ser nulo o estar vacio");
+      throw new MiException("el email no puede ser nulo o estar vacio");
     }
     if (password.isEmpty() || password == null || password.length() <= 5) {
-        throw new MiException("La contraseña no puede estar vacía, y debe tener más de 5 dígitos");
+      throw new MiException("La contraseña no puede estar vacía, y debe tener más de 5 dígitos");
     }
 
     if (!password.equals(password2)) {
-        throw new MiException("Las contraseñas ingresadas deben ser iguales");
+      throw new MiException("Las contraseñas ingresadas deben ser iguales");
     }
-}
-
+  }
 
   /*
    * MÉTODO CARGAR x NOMBRE USUARIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -232,11 +233,17 @@ public class UsuarioServicio implements UserDetailsService {
    * MÉTODO ELIMINAR USUARIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
   @Transactional
-  public void eliminarUsuario(String id) throws MiException {
-    
-    Usuario usuario = usuarioRepositorio.getById(id);
-    
-    usuarioRepositorio.deleteById(id);;
+  public void eliminarUsuario(String id) {
+    Optional<Usuario> listaUsuarios = usuarioRepositorio.findById(id);
+
+    if (listaUsuarios.isPresent()) {
+
+      Usuario usuario = listaUsuarios.get();
+
+      usuarioRepositorio.getById(id);
+
+      usuarioRepositorio.deleteById(id);
+    }
   }
 
   /*

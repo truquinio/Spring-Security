@@ -76,7 +76,7 @@ public class LibroControlador {
       // la llave "exito"
       modelo.put("exito", "El libro fue cargado correctamente!");
 
-      return "index.html"; // Si todo sale bien, nos envía al index
+      return "panel.html"; // Si todo sale bien, nos envía al index
 
     } catch (MiException exception) {
 
@@ -111,7 +111,7 @@ public class LibroControlador {
    * MÉTODO MODIFICAR LIBROS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
-  @GetMapping("/modificar/{isbn}")
+  @GetMapping("/modificar/{isbn}") // GET = Para trabajar con el HTML
   public String modificar(@PathVariable Long isbn, ModelMap modelo) {
 
     modelo.put("libro", libroServicio.getOne(isbn));
@@ -125,8 +125,9 @@ public class LibroControlador {
     return "libro_modificar.html";
   }
 
-  @PostMapping("/modificar/{isbn}")
-  public String modificar(@PathVariable Long isbn, String titulo, Integer ejemplares, String idAutor,
+  // LO USO PARA EL BOTÓN ACTUALIZAR
+  @PostMapping("/modificado/{isbn}") // POST = Modificar BASE de DATOS
+  public String modificado(@PathVariable Long isbn, String titulo, Integer ejemplares, String idAutor,
       String idEditorial, ModelMap modelo) {
 
     try {
@@ -138,7 +139,7 @@ public class LibroControlador {
 
       libroServicio.modificarLibro(isbn, titulo, idAutor, idEditorial, ejemplares);
 
-      return "redirect:../lista";
+      return "redirect:/libro/lista";
 
     } catch (MiException ex) {
 
@@ -157,7 +158,7 @@ public class LibroControlador {
   /*
    * MÉTODO ELIMINAR LIBRO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
-  @GetMapping("/eliminar/{id}")
+  @PostMapping("/eliminar/{id}")
   public String eliminar(@PathVariable Long id, ModelMap modelo) {
     try {
       libroServicio.eliminarLibro(id);

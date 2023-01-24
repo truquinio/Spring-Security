@@ -1,5 +1,7 @@
 package com.egg.biblioteca.controladores;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.egg.biblioteca.entidades.Usuario;
+import com.egg.biblioteca.enumeraciones.Rol;
 import com.egg.biblioteca.excepciones.MiException;
+import com.egg.biblioteca.repositorios.UsuarioRepositorio;
 import com.egg.biblioteca.servicios.UsuarioServicio;
 
 import jakarta.servlet.http.HttpSession;
@@ -23,6 +27,9 @@ public class PortalControlador { // localhost:8080/
 
   @Autowired // @Autowired = Inyección de dependencias, vincula al JPA
   private UsuarioServicio usuarioServicio;
+
+  @Autowired
+  private UsuarioRepositorio usuarioRepositorio;
 
   /*
    * INDEX >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -149,11 +156,11 @@ public class PortalControlador { // localhost:8080/
     // Con modelo pongo los datos para q se autocomplete el form
     modelo.put("usuario", usuario);
 
-    return "usuario_modificar.html";
+    return "perfil_modificar.html";
   }
 
   /*
-   * MÉTODO ACTUALIZAR USUARIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   * MÉTODO ACTUALIZAR PERFIL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
   @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
@@ -168,7 +175,7 @@ public class PortalControlador { // localhost:8080/
       modelo.put("exito", "Usuario actualizado correctamente!");
 
       return "inicio.html";
-      
+
     } catch (MiException ex) {
 
       modelo.put("error", ex.getMessage());
