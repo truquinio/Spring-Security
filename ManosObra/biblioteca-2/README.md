@@ -1,4 +1,4 @@
-# Biblioteca
+# 📚 Biblioteca
 
 • Visita mi <a href="https://github.com/truquinio/Spring-Security/tree/master/ManosObra/biblioteca-2">repositorio</a> 🗃
 
@@ -20,13 +20,9 @@ Esquema sobre el cual operará el sistema biblioteca. CREATE DATABASE biblioteca
 ### 📦 Paquetes del Proyecto
 
 - vistas: en este paquete se almacenarán aquellas clases que se utilizarán como vistas con el usuario.
-
 - controladores: en este paquete se almacenarán aquellas clases que se utilizarán para mediar entre la vista con el usuario y las capas inferiores.
-
 - servicios: en este paquete se almacenarán aquellas clases que llevarán adelante lógica del proyecto.
-
 - repositorios: en este paquete se crearán los repositorios que servirán como interfaces entre el modelo de objetos y la base de datos relacional.
-
 - entidades: en este paquete se almacenarán aquellas clases que es necesario persistir en la base de datos.
 
 ## 🃏 Extras:
@@ -43,15 +39,15 @@ Esquema sobre el cual operará el sistema biblioteca. CREATE DATABASE biblioteca
 
 ## 🎞 Screenshot:
 
-![b1](/src/main/resources/static/img/biblioteca1.png)
-![b2](/src/main/resources/static/img/biblioteca2.png)
-![b3](/src/main/resources/static/img/biblioteca3.png)
-![b4](/src/main/resources/static/img/biblioteca4.png)
-![b5](/src/main/resources/static/img/biblioteca5.png)
-![b6](/src/main/resources/static/img/biblioteca6.png)
-![b7](/src/main/resources/static/img/biblioteca7.png)
-![b8](/src/main/resources/static/img/biblioteca8.png)
-![b9](/src/main/resources/static/img/biblioteca9.png)
+![biblio1](/img/biblioteca1.png)
+![biblio2](/img/biblioteca2.png)
+![biblio3](/img/biblioteca3.png)
+![biblio4](/img/biblioteca4.png)
+![biblio5](/img/biblioteca5.png)
+![biblio6](/img/biblioteca6.png)
+![biblio7](/img/biblioteca7.png)
+![biblio8](/img/biblioteca8.png)
+![biblio9](/img/biblioteca9.png)
 
 ## 👨🏻‍💻 Autor:
 
