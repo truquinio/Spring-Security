@@ -46,7 +46,7 @@ Esquema sobre el cual operará el sistema biblioteca. CREATE DATABASE biblioteca
 ![biblio5](https://i.ibb.co/StrwRHj/biblioteca5.png)
 ![biblio6](https://i.ibb.co/cNyhtYn/biblioteca6.png)
 ![biblio7](https://i.ibb.co/f46jRRc/biblioteca7.png)
-![biblio8](https://i.ibb.co/1ddPRmH/biblioteca8.png)
+![biblio8](https://i.ibb.co/nnnYQLh/biblioteca8.png)
 ![biblio9](https://i.ibb.co/6wgP3HD/biblioteca9.png)
 
 ## 👨🏻‍💻 Autor:
