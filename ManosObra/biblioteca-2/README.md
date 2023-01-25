@@ -1,16 +1,14 @@
 # 📚 Biblioteca
 
 • Visita mi <a href="https://github.com/truquinio/Spring-Security/tree/master/ManosObra/biblioteca-2">repositorio</a> 🗃
-
 <!-- • Ir al <a href="https://truquinio.github.io/alura-challenge-1-Encriptador/">encriptador</a> 🔗 -->
-
 • Mi perfil de <a href="https://www.linkedin.com/in/federico-trucco/">LinkedIn</a> 🪪
 
 ## Objetivo:
 
 El objetivo de este ejercicio consiste en el desarrollo de un sistema web en Java utilizando una
-base de datos MySQL, JPA Repository para persistir objetos y Spring Boot y Spring Security como framework de
-desarrollo web.
+base de datos MySQL, JPA Repository para persistir objetos, Spring Boot y Spring Security como framework de
+desarrollo y seguridad web.
 
 ## 🔰 Requisitos: 
 
