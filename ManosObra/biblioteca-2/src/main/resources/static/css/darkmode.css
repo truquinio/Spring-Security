@@ -1,7 +1,7 @@
 /*    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  DARK MODE  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  */
 #darkmode {
   position: relative;
-  /* left: 45%; */
+  left: 8%;
 
   float: right;
 
@@ -67,7 +67,7 @@ body.active {
 
 /*  NAVBAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
 #navbar.active{
-  background: #2a2a2a;
+  background-color: transparent;
 }
 
 #lista1.active{
@@ -86,7 +86,19 @@ body.active {
   color: #fff;
 }
 
+#lista5.active{
+  color: #fff;
+}
+
 /*  MAIN >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+#main0.active{
+  background: #000000 url(../img/FondoZoom_dark.png);
+  background-size: cover;
+  height: 550px;
+  display: flex;
+  justify-content: end;
+}
+
 #main.active{
   background: #000000 url(../img/FondoZoom_dark.png);
   background-size: cover;
@@ -95,8 +107,16 @@ body.active {
   justify-content: end;
 }
 
-#main2.active{
-  background: #000000 url(../img/FondoZoom-dark.png);
+#main2.active {
+  background-image: url(../img/FondoZoom_dark2.png);
+  background-size: cover;
+  height: 550px;
+  display: flex;
+  justify-content: end;
+}
+
+#main3.active {
+  background-image: url(../img/FondoZoom_dark1.png);
   background-size: cover;
   height: 550px;
   display: flex;
@@ -107,9 +127,10 @@ body.active {
 /*  FOOTER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
 #footer.active {
   color: #fff;
+  background-color: transparent;
 }
 
-#footer.active a{
+#footer.active a {
   color: #ffc041;
   text-decoration: none;
 }

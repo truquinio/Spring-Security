@@ -13,7 +13,7 @@ body {
 body {
     min-height: 100vh;
 
-    color: #11434d;
+    color: var(--text);
 }
 
 #main {
@@ -25,6 +25,14 @@ body {
 }
 
 #main2 {
+    background-image: url(../img/FondoZoom.jpg);
+    background-size: cover;
+    height: 550px;
+    display: flex;
+    justify-content: end;
+}
+
+#main3 {
     background-image: url(../img/FondoZoom_1.jpg);
     background-size: cover;
     height: 550px;

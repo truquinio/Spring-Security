@@ -2,8 +2,8 @@
   position: absolute;
   bottom: 10px;
 
-  color: #598195;
-  background: #fff;
+  color: #7598aa;
+  /* background: #fff; */
 
   height: auto;
   width: 100%;
@@ -49,7 +49,7 @@
 
 /*  BOTÓN IR AL CIELO */
 .up-sky {
-  color: #37474f;
+  color: #7598aa;
   text-decoration: none;
 
   transition: 1s all;

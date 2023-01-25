@@ -15,18 +15,25 @@
           <img class="logo" src="/img/Egg.png" alt="Img logo egg">
         </a>
       </div>
-  
+
+      <!-- DARK MODE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+      <div id="darkmode">
+        <img class="sun" src="/img/sun.png">
+        <img class="moon" src="/img/moon.png">
+        <div class="toggle"></div>
+      </div>
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-  
-  
+
+
       <!-- CREAR y LISTAR LIBROS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
       <div class="collapse navbar-collapse elementosNav" id="desplegables">
-  
+
         <ul class="navbar-nav ms-auto elementos">
-  
+
           <!-- th:if="${session.usuariosession == null} / Sólo muestra los botones si NO está logueado -->
           <li th:if="${session.usuariosession == null}" class="nav-item">
             <a class="nav-link " href="/registrar" id="lista1" role="button" aria-expanded="false">📝 Registrate!

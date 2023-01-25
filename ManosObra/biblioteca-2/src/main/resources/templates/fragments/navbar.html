@@ -6,6 +6,18 @@
       </a>
     </div>
 
+    <!-- DARK MODE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    <div id="darkmode">
+      <img class="sun" src="/img/sun.png">
+      <img class="moon" src="/img/moon.png">
+      <div class="toggle"></div>
+    </div>
+
+    <!-- <label class="switch">
+      <input type="checkbox" id="slider">
+      <span class="slider"><img class="sun" src="/img/sun.png"><img class="moon" src="/img/moon.png"></span>
+    </label> -->
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -85,7 +97,7 @@
           <!-- USUARIOS / LISTAR  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
 
         <li sec:authorize="hasRole('ADMIN')" class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" href="#" role="button"
+          <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" id="lista4" href="#" role="button"
             data-bs-toggle="dropdown" aria-expanded="false">
             Usuarios
           </a>
@@ -98,8 +110,8 @@
         <!-- ROL USUARIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
 
         <!--<li  th:if="${session.usuariosession != null}"  class="nav-item dropdown" id="desplegables"> -->
-        <li sec:authorize="hasAnyRole('ADMIN','USER')" class="nav-item dropdown" id="desplegables">
-          <a class="nav-link dropdown-toggle" href="#" id="userName" role="button" data-bs-toggle="dropdown"
+        <li sec:authorize="hasAnyRole('ADMIN','USER')" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="lista5" role="button" data-bs-toggle="dropdown"
             aria-expanded="false" th:if="${session.usuariosession != null}" th:text="${session.usuariosession.nombre}">
             <!-- <img class="logo" id="imgPerfil1" th:src="@{/imagen/perfil/__${session.usuariosession.id}__}"> -->
           </a>
@@ -135,7 +147,7 @@
 
       <!-- th:if="${session.usuariosession == null} / Sólo muestra los botones si NO está logueado -->
       <li th:if="${session.usuariosession == null}" class="nav-item">
-        <a class="nav-link " href="/registrar" id="lista1" role="button" aria-expanded="false">📝 Registrate!
+        <a class="nav-link " href="/registrar" id="lista2" role="button" aria-expanded="false">📝 Registrate!
         </a>
       </li>
 

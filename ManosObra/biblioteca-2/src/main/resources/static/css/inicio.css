@@ -1,4 +1,4 @@
-.main {
+.main{
   background-image: url(../img/FondoZoom.jpg);
   background-size: cover;
   height: 400px;
@@ -33,4 +33,14 @@
 
 .botonCargar:active {
   box-shadow: none;
+}
+
+
+/*  MAIN >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+#main.active{
+  background: #000000 url(../img/FondoZoom_dark.png);
+  background-size: cover;
+  height: 550px;
+  display: flex;
+  justify-content: end;
 }
