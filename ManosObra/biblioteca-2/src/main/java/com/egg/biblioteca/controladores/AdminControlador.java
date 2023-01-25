@@ -98,8 +98,7 @@ public class AdminControlador {
   /*
    * MÉTODO ELIMINAR USUARIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
-
-  @PostMapping("/eliminar/{id}")
+  @RequestMapping("/eliminar/{id}") // @RequestMapping = Configura la URL de clase controladora
   public String eliminar(@PathVariable String id, ModelMap modelo) {
 
     try {
