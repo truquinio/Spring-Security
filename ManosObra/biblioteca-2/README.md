@@ -39,15 +39,15 @@ Esquema sobre el cual operará el sistema biblioteca. CREATE DATABASE biblioteca
 
 ## 🎞 Screenshot:
 
-![biblio1](/img/biblioteca1.png)
-![biblio2](/img/biblioteca2.png)
-![biblio3](/img/biblioteca3.png)
-![biblio4](/img/biblioteca4.png)
-![biblio5](/img/biblioteca5.png)
-![biblio6](/img/biblioteca6.png)
-![biblio7](/img/biblioteca7.png)
-![biblio8](/img/biblioteca8.png)
-![biblio9](/img/biblioteca9.png)
+![biblio1](https://i.ibb.co/bJbxyrh/biblioteca1.png)
+![biblio2](https://i.ibb.co/4PNgjkK/biblioteca3.png)
+![biblio3](https://i.ibb.co/93wvbcW/biblioteca2.png)
+![biblio4](https://i.ibb.co/hMCvDG1/biblioteca4.png)
+![biblio5](https://i.ibb.co/StrwRHj/biblioteca5.png)
+![biblio6](https://i.ibb.co/cNyhtYn/biblioteca6.png)
+![biblio7](https://i.ibb.co/f46jRRc/biblioteca7.png)
+![biblio8](https://i.ibb.co/nnnYQLh/biblioteca8.png)
+![biblio9](https://i.ibb.co/6wgP3HD/biblioteca9.png)
 
 ## 👨🏻‍💻 Autor:
 
