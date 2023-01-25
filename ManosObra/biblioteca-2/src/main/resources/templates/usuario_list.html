@@ -43,7 +43,7 @@
             <td th:text="${usuario.nombre}"></td>
             <td th:text="${usuario.email}"></td>
             <td th:text="${usuario.rol}"></td>
-            <td <a><img th:if="${usuario.imagen != null}" class="fotoUser" th:src="@{/imagen/perfil/__${usuario.id}__}"></a>
+            <td <p><img th:if="${usuario.imagen != null}" class="fotoUser" th:src="@{/imagen/perfil/__${usuario.id}__}"></p>
             </td>
 
             <td>
