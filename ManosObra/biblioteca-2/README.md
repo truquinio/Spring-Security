@@ -39,15 +39,8 @@ Esquema sobre el cual operará el sistema biblioteca. CREATE DATABASE biblioteca
 
 ## 🎞 Screenshot:
 
-![biblio1](/img/biblioteca1.png)
-![biblio2](/img/biblioteca2.png)
-![biblio3](/img/biblioteca3.png)
-![biblio4](/img/biblioteca4.png)
-![biblio5](/img/biblioteca5.png)
-![biblio6](/img/biblioteca6.png)
-![biblio7](/img/biblioteca7.png)
-![biblio8](/img/biblioteca8.png)
-![biblio9](/img/biblioteca9.png)
+<img src="/img/biblioteca2.png">
+
 
 ## 👨🏻‍💻 Autor:
 
