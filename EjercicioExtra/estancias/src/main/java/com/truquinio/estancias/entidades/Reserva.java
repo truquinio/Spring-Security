@@ -17,24 +17,24 @@ import lombok.NoArgsConstructor;
 @Data // Crea Constr lleno + Getters & Setters + HasCode + equals + toString
 @NoArgsConstructor // Crea constructor vacío
 public class Reserva {
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
 
-  @Id
-  @GeneratedValue(generator = "uuid")
-  @GenericGenerator(name = "uuid", strategy = "uuid2")
-  private String id;
-  private String huesped;
+    String huesped;
 
-  @Temporal(TemporalType.DATE)
-  private Date fechaDesde;
+    @Temporal(TemporalType.DATE)
+    Date fechaDesde;
 
-  @Temporal(TemporalType.DATE)
-  private Date fechaHasta;
+    @Temporal(TemporalType.DATE)
+    Date fechaHasta;
 
-  @OneToOne
-  private Cliente cliente;
+    @OneToOne
+    Cliente cliente;
 
-  @OneToOne
-  private Casa casa;
+    @OneToOne
+    Casa casa;
 }
 
 /*

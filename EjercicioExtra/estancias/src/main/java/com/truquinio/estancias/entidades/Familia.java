@@ -1,6 +1,10 @@
 package com.truquinio.estancias.entidades;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,11 +13,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor // Crea constructor vacío
 public class Familia extends Usuario {
 
-    private String nombre;
-    private int edadMin;
-    private int edadMax;
-    private int numHijos;
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
 
+    private String nombre;
+    private Integer edadMin;
+    private Integer edadMax;
+    private Integer numHijos;
 }
 
 /*

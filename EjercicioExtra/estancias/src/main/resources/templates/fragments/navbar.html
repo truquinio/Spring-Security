@@ -1,0 +1,210 @@
+<!-- <header>
+  <div class="caja">
+    <h1><img src="logo.jpg" alt="Logo de la estancias"></h1>
+    <nav>
+      <ul class="navegacion">
+        <li><a href="/">Home</a></li>
+        <li><a href="/familias">Familias</a></li>
+        <li><a href="/usuarios">Usuarios</a></li>
+      </ul>
+    </nav>
+  </div>
+</header> -->
+
+<header th:fragment="navbar_users">
+  <nav class="navbar navbar-expand-lg navBar" id="navbar">
+    <div class="containerImg">
+      <a href="/" class="navbar-brand d-flex align-items-center">
+        <img class="logo" src="/img/Egg.png" alt="Img logo egg">
+      </a>
+    </div>
+
+    <!-- DARK MODE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    <div id="darkmode">
+      <img class="sun" src="/img/sun.png">
+      <img class="moon" src="/img/moon.png">
+      <div class="toggle"></div>
+    </div>
+
+    <!-- <label class="switch">
+        <input type="checkbox" id="slider">
+        <span class="slider"><img class="sun" src="/img/sun.png"><img class="moon" src="/img/moon.png"></span>
+      </label> -->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <!-- CREAR y LISTAR LIBROS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    <div class="collapse navbar-collapse elementosNav">
+
+      <ul class="navbar-nav ms-auto elementos" id="desplegables">
+
+        <!-- sec:authorize="hasAnyRole('ADMIN','USER')" / Muestro LIBROS sólo si está logueado -->
+        <li class="nav-item dropdown">
+
+          <a class="nav-link dropdown-toggle" href="#" id="lista1" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Familias
+          </a>
+
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <!-- En los href pongo a qué controlador se tiene que ir cuando toque "Crear Libro" -->
+
+            <!-- sec:authorize="hasRole('ADMIN')" / Muestro sólo si es ADMIN -->
+            <li><a class="dropdown-item" th:href="@{/usuario/registrar}">Registrar Usuario</a>
+            </li>
+
+            <!-- <li sec:authorize="hasRole('ADMIN')"> -->
+              <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li><a class="dropdown-item" th:href="@{/usuario/lista}">Listar Usuario</a></li>
+
+          </ul>
+        </li>
+
+
+        <!-- CREAR y LISTAR FAMILIAS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="" id="lista2" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Familia
+          </a>
+
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="listas">
+
+            <li><a class="dropdown-item" th:href="@{/familia/registrar}">Registrar Familia</a>
+            </li>
+
+            <!-- <li sec:authorize="hasRole('ADMIN')"> -->
+              <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li><a class="dropdown-item" th:href="@{/familia/lista}">Listar Familia</a></li>
+          </ul>
+        </li>
+
+        <!-- CREAR y LISTAR EDITORIALES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+        <li class="nav-item dropdown">
+
+          <a class="nav-link dropdown-toggle" href="#" id="lista3" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Reservas
+          </a>
+
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="listas">
+
+            <li><a class="dropdown-item" th:href="@{/reserva/registrar}">Crear
+                Reserva</a></li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li><a class="dropdown-item" th:href="@{/reserva/lista}">Listar Reservas</a></li>
+          </ul>
+
+          <!-- USUARIOS / LISTAR  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" th:if="${session.usuariosession != null}" id="lista4" href="#"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Usuarios
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+            <li><a class="dropdown-item" th:href="@{/admin/usuarios}">Listar Usuarios</a></li>
+          </ul>
+        </li>
+
+        <!-- ROL USUARIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+        <!--<li  th:if="${session.usuariosession != null}"  class="nav-item dropdown" id="desplegables"> -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="lista5" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false" th:if="${session.usuariosession != null}" th:text="${session.usuariosession.nombre}">
+            <!-- <img class="logo" id="imgPerfil1" th:src="@{/imagen/perfil/__${session.usuariosession.id}__}"> -->
+          </a>
+
+          <a th:if="${session.usuariosession.imagen != null}">
+            <img class="logo" id="imgPerfil1" th:src="@{/imagen/perfil/__${session.usuariosession.id}__}">
+          </a>
+
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <!-- <li><a class="dropdown-item" th:href="@{/perfil}">Editar Perfil</a></li> -->
+
+
+            <!-- EDITAR PERFIL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+            <li><a class="dropdown-item" th:href="@{/perfil}">Editar Perfil</a></li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <!-- CERRAR SESIÓN >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+            <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
+          </ul>
+      </ul>
+      </li>
+
+
+      <!-- INGRESAR / REGISTRAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+      <li class="nav-item">
+        <a class="nav-link" href="/login" id="lista1" role="button" aria-expanded="false">✅ Login</a>
+      </li>
+
+      <!-- th:if="${session.usuariosession == null} / Sólo muestra los botones si NO está logueado -->
+      <li class="nav-item">
+        <a class="nav-link " href="/registrar" id="lista2" role="button" aria-expanded="false">📝 Registrate!
+        </a>
+      </li>
+
+    </div>
+  </nav>
+</header>
+
+
+
+<!-- NAVBAR LOGIN >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+<header th:fragment="navbar_login">
+  <nav class="navbar navbar-expand-lg navBar" id="navbar">
+    <div class="containerImg">
+      <a href="/" class="navbar-brand d-flex align-items-center">
+        <img class="logo" src="/img/Egg.png" alt="Img logo egg">
+      </a>
+    </div>
+
+    <!-- DARK MODE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    <!-- <div id="darkmode">
+        <img class="sun" src="/img/sun.png">
+        <img class="moon" src="/img/moon.png">
+        <div class="toggle"></div>
+      </div> -->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <!-- CREAR y LISTAR LIBROS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    <div class="collapse navbar-collapse elementosNav" id="desplegables">
+
+      <ul class="navbar-nav ms-auto elementos">
+
+        <!-- th:if="${session.usuariosession == null} / Sólo muestra los botones si NO está logueado -->
+        <li th:if="${session.usuariosession == null}" class="nav-item">
+          <a class="nav-link " href="/registrar" id="lista1" role="button" aria-expanded="false">📝 Registrate!
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

@@ -11,38 +11,38 @@ import jakarta.transaction.Transactional;
 @Service
 public class CasaServicio {
 
-    @Autowired
-    CasaRepositorio casaRepositorio;
+  @Autowired
+  CasaRepositorio casaRepositorio;
 
-    /*
+  /*
    * MÉTODO CREAR CASAS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
 
   @Transactional // @Transactional = Si falla modificación en database hace rollback, no modifica
-  public void crearCasa() throws MiException {
+
+  private void crearCasa(String nombre) {
+
+  }
+}
 
 /*
  * private String id;
-    private String calle;
-    private int numero;
-    private String ciudad;
-    private String pais;
-
-    @Temporal(TemporalType.DATE)
-    private Date fechaDesde;
-
-    @Temporal(TemporalType.DATE)
-    private Date fechaHasta;
-
-    private int minDias;
-    private int maxDias;
-    private Double precio;
-    private String tipoVivienda;
+ * private String calle;
+ * private int numero;
+ * private String ciudad;
+ * private String pais;
+ * 
+ * @Temporal(TemporalType.DATE)
+ * private Date fechaDesde;
+ * 
+ * @Temporal(TemporalType.DATE)
+ * private Date fechaHasta;
+ * 
+ * private int minDias;
+ * private int maxDias;
+ * private Double precio;
+ * private String tipoVivienda;
  */
-
-}
-
-}
 
 /*
  * Esta clase tiene la responsabilidad de llevar adelante las funcionalidades

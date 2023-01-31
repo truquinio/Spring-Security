@@ -1,27 +1,23 @@
 package com.truquinio.estancias.entidades;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data // Crea Constr lleno + Getters & Setters + HasCode + equals + toString
 @NoArgsConstructor // Crea constructor vacío
+@EqualsAndHashCode(callSuper = false)
 public class Cliente extends Usuario {
 
   private String nombre;
   private String calle;
-  private int numero;
+  private Integer numero;
   private String codPostal;
   private String ciudad;
   private String pais;
   private String email;
-
 }
 
 /*

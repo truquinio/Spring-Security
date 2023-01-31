@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = { "repositorios" })
+@EnableJpaRepositories(basePackages = "com.truquinio.estancias.repositorios")
 public class EstanciasApplication {
 
 	public static void main(String[] args) {

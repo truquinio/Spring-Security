@@ -14,4 +14,3 @@ public interface FamiliaRepositorio extends JpaRepository<Familia, String>{
     @Query("SELECT f FROM Familia f WHERE f.email = :email")
     public Familia buscarPorEmail(@Param("email") String email);
 }
-

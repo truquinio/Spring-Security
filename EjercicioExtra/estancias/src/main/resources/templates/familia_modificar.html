@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!-- html xmlns:th="http://www.thymeleaf.org" = Para evitar que HTML arroje errores por trabajar con elementos de thymeleaf -->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!-- <etiqueta-Padre th:replace = "/Carpeta-Plantilla/etiqueta-hijo :: etiqueta-Padre"></etiqueta-Padre> -->
+
+<head th:replace="/fragments/head :: header_index"></head>
+
+<body>
+
+  <main>
+    <!-- FORMULARIO EDITAR USUARIO  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    <div class="container-fluid m-5 contenedor">
+      <!-- sec:authorize="hasRole('ADMIN') = Sólo rol ADMIN puede acceder al formulario -->
+
+      <form class="formulario" th:action="@{/familias/modificar__${familia.id}__}" method="POST" enctype="multipart/form-data">
+        <!-- enctype = multipart/form-data = Permite enviar tanto texto como archivos -->
+        <!-- th:action="@{/perfil/__${usuario.id}__}" = @PostMapping("/perfil/{id}" de PortalControladora -->
+
+
+        <div class="form-group my-2">
+          <h3 class="card-title">👤 Editar Familia</h3>
+        </div>
+
+        <div class="form-group my-2">
+          <input th:value="${familia.id}" type="text" class="form-control" name="id" placeholder="id:">
+        </div>
+
+        <div class="form-group my-2">
+          <input type="text" class="form-control" name="nombre" th:value="${familia.nombre}" required>
+        </div>
+
+        <div class="form-group my-2">
+          <input type="email" class="form-control" name="email" th:value="${familia.email}" required>
+        </div>
+
+        <div class="form-group my-2">
+          <input type="file" class="form-control" name="archivo" required>
+        </div>
+
+        <div class="form-group my-2">
+          <input type="password" class="form-control" name="password" placeholder="CONTRASEÑA" th:value="${password}"
+            required>
+        </div>
+
+        <div class="form-group my-2">
+          <input type="password" class="form-control" name="password2" placeholder="REPETIR CONTRASEÑA"
+            th:value="${password2}" required>
+        </div>
+
+        <!-- BOTÓN ACTUALIZAR  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+        <div class="divGuardar2">
+          <button type="submit" class="btn btn-primary mt-3 botones" id="botonAmarillo">Actualizar</button>
+        </div>
+      </form>
+  </main>
+
+
+
+  <!-- PIE DE PÁGINA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+  <footer th:replace="fragments/footer :: footer"></footer>
+
+
+  <!--	SCRIP de BOOTSTRAP v5.3  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+  <script th:replace="fragments/bootstrap :: script"></script>
+
+</body>
+
+</html>

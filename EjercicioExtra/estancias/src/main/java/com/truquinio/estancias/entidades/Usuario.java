@@ -21,26 +21,25 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data // Crea Constr lleno + Getters & Setters + HasCode + equals + toString
 @NoArgsConstructor // Crea constructor vacío
-@Inheritance(strategy = InheritanceType.JOINED) // InheritanceType.JOINED = Para
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario {
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
 
-  @Id
-  @GeneratedValue(generator = "uuid")
-  @GenericGenerator(name = "uuid", strategy = "uuid2")
-  private String id;
+    private String alias;
+    private String email;
+    private String clave;
 
-  private String alias;
-  private String email;
-  private String clave;
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
 
-  @Temporal(TemporalType.DATE)
-  private Date fechaAlta;
+    @Temporal(TemporalType.DATE)
+    private Date fechaAlta;
 
-  @Temporal(TemporalType.DATE)
-  private Date fechaBaja;
-
-  @Enumerated(EnumType.STRING)
-  private Rol rol;
+    @Temporal(TemporalType.DATE)
+    private Date fechaBaja;
 }
 
 /*

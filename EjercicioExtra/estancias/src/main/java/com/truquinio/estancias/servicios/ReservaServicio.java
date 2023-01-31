@@ -96,24 +96,42 @@ public class ReservaServicio {
   /*
    * MÉTODO MODIFICAR RESERVAS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
-@Transactional
-public void modificarReserva(String huesped, Date fechaDesde, Date fechaHasta, String idCliente, String idCasa)
-throws MiException {
+  @Transactional
+  public void modificarReserva(String huesped, Date fechaDesde, Date fechaHasta, String idCliente, String idCasa)
+      throws MiException {
 
-  // validar todo de Reserva, desde ValidacionServicio
-  validacion.validarHuesped(huesped);
-  validacion.validarFecha(fechaDesde);
-  validacion.validarFecha(fechaHasta);
+    // validar todo de Reserva, desde ValidacionServicio
+    validacion.validarHuesped(huesped);
+    validacion.validarFecha(fechaDesde);
+    validacion.validarFecha(fechaHasta);
 
-// Encuentra por id Cliente y Familia, los trae y guarda en objetos
-Optional<Cliente> respuestaCliente = clienteRepositorio.findById(idCliente);
-Optional<Casa> respuestaCasa = casaRepositorio.findById(idCasa);
-// Optional = Por si id existe o no y si contiene algún error
+    // Encuentra por id Cliente y Familia, los trae y guarda en objetos
+    Optional<Cliente> respuestaCliente = clienteRepositorio.findById(idCliente);
+    Optional<Casa> respuestaCasa = casaRepositorio.findById(idCasa);
+    // Optional = Por si id existe o no y si contiene algún error
 
-// Objetos Cliente y Casa
-Cliente cliente = new Cliente();
-Casa casa = new Casa();
+    // Objetos Cliente y Casa
+    Cliente cliente = new Cliente();
+    Casa casa = new Casa();
 
+    // Valida si la respuesta está presente
+    if (respuestaCliente.isPresent()) {
+      cliente = respuestaCliente.get();
+    }
+
+    if (respuestaCasa.isPresent()) {
+      casa = respuestaCasa.get();
+    }
+  }
+
+    /*
+   * MÉTODO ELIMINAR RESERVAS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
+  @Transactional
+  public void eliminarReserva( String id) throws MiException{
+    Reserva estancia = reservaRepositorio.getById(id);
+    reservaRepositorio.delete(estancia);
+  }
 
 }
 

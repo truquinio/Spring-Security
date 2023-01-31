@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!-- html xmlns:th="http://www.thymeleaf.org" = Para evitar que HTML arroje errores por trabajar con elementos de thymeleaf -->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!-- <etiqueta-Padre th:replace = "/Carpeta-Plantilla/etiqueta-hijo :: etiqueta-Padre"></etiqueta-Padre> -->
+<head th:replace="/fragments/head :: header_index"></head>
+
+<body>
+  <header>
+    <div class="caja">
+        <h1><img src="logo.jpg" alt="Logo de la estancias"></h1>
+        <nav>
+            <ul class="navegacion">
+                <li><a href="/" >Home</a></li>
+                <li><a href="/familias">Familias</a>
+                <ul>
+                  <li></li>
+                </ul>
+                </li>
+                <li><a href="/clientes">Clientes</a></li>
+                <li><a href="/usuarios">Usuarios</a></li>
+            </ul>
+        </nav>
+    </div>          
+</header>
+
+  <main>SOY UN INDEX BIEN FULERO</main>
+
+  <!-- PIE DE PÁGINA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+  <footer th:replace="fragments/footer :: footer"></footer>
+
+
+  <!--	SCRIP de BOOTSTRAP v5.3  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  -->
+  <script th:replace="fragments/bootstrap :: script"></script>
+
+</body>
+
+</html>

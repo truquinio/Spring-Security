@@ -2,6 +2,7 @@ package com.truquinio.estancias.entidades;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -10,19 +11,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data // Crea Constr lleno + Getters & Setters + HasCode + equals + toString
+@Data
 @NoArgsConstructor // Crea constructor vacío
 public class Comentario {
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    String id;
 
-  @Id
-  @GeneratedValue(generator = "uuid")
-  @GenericGenerator(name = "uuid", strategy = "uuid2")
-  private String id;
+    @Column(columnDefinition = "TEXT")
+    String descripcion;
 
-  private String descripcion;
-
-  @OneToOne
-  private Casa casa;
+    @OneToOne
+    Casa casa;
 }
 
 /*

@@ -7,8 +7,6 @@ import org.hibernate.annotations.GenericGenerator;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,18 +20,18 @@ public class Casa {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private String calle;
-    private int numero;
+    private Integer numero;
     private String ciudad;
     private String pais;
 
-    @Temporal(TemporalType.DATE)
+    // @Temporal(TemporalType.DATE)
     private Date fechaDesde;
 
-    @Temporal(TemporalType.DATE)
+    // @Temporal(TemporalType.DATE)
     private Date fechaHasta;
 
-    private int minDias;
-    private int maxDias;
+    private Integer minDias;
+    private Integer maxDias;
     private Double precio;
     private String tipoVivienda;
 
