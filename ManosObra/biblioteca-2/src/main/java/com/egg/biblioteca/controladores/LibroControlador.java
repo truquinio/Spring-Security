@@ -54,15 +54,13 @@ public class LibroControlador {
     return "libro_form.html"; // Retorna un String "archivo.html" que debo crear dentro de resources/templates
   }
 
-  @PostMapping("/registro") // @PostMapping("/registro") = Se accede al action de HTML a travez de un método
-                            // POST
+  @PostMapping("/registro") // @PostMapping("/registro") = Se accede al action de HTML a travez de POST
   public String registro(@RequestParam(required = false) Long isbn, @RequestParam String titulo,
       @RequestParam(required = false) Integer ejemplares, @RequestParam String idAutor,
       @RequestParam String idEditorial, ModelMap modelo) {
-    // Método registro = Recibe parámetro llamado igual q atributo name de INPUT de
-    // HTML
-    // @RequestParam = Indica a controlador q parámetro viaja en la URL y se ejecuta
-    // cuando llene formulario
+    // Método registro = Recibe parámetro llamado igual q attr name de INPUT de HTML
+    // @RequestParam = Indica a controlador q param viaja x URL y se ejecuta cuando
+    // llene form
     // ModelMap = Inserta información q vamos a mostrar en interface del usuario
 
     // System.out.println("Nombre: " + nombre);
@@ -72,11 +70,10 @@ public class LibroControlador {
       // Llamo al método crearLibro, de la clase LibroServicio
       libroServicio.crearLibro(isbn, titulo, ejemplares, idAutor, idEditorial);
 
-      // En caso de cargar todo correctamente, el usuario verá el sig. mensaje, bajo
-      // la llave "exito"
+      // En caso de cargar todo OK, el usuario ve el sig. mensaje de llave "exito"
       modelo.put("exito", "El libro fue cargado correctamente!");
 
-      return "panel.html"; // Si todo sale bien, nos envía al index
+      return "panel.html"; // Si todo OK, nos envía al index
 
     } catch (MiException exception) {
 
@@ -86,11 +83,10 @@ public class LibroControlador {
       modelo.addAttribute("autores", autores);
       modelo.addAttribute("editoriales", editoriales);
 
-      // En caso de NO cargar correctamente, el usuario verá el sig. mensaje, bajo la
-      // llave "error"
+      // En caso de NO cargar todo OK, el usuario ve el sig. mensaje de llave "error"
       modelo.put("error", exception.getMessage());
 
-      return "libro_form.html"; // Si hay un error, se vuelve a cargar la página del formulario
+      return "libro_form.html"; // Si hay error, vuelve a cargar la página del form
     }
   }
 
