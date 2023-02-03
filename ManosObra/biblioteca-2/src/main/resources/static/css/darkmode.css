@@ -1,141 +1,143 @@
-/*    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  DARK MODE  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  */
-#darkmode {
-  position: relative;
-  left: 8%;
-
-  float: right;
-
-  width: 60px;
-  height: 30px;
-
-  background: #ebebeb;
-  box-shadow: inset 4px 4px 6px #cecece,
-    inset -4px -4px 6px #fff;
-
-  border-radius: 25px;
-
-  cursor: pointer;
-
-  transform: scale(0.8);
+/* BODY >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+body {
+	background-color: white;
+	color: #262626;
 }
 
-.sun {
-  position: absolute;
-  top: 0;
-  right: 30px;
-  width: 30px;
-  height: 30px;
-}
+body.dark-mode {
+	background-color: #262626;
+	color: white;
 
-.moon {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 30px;
-  height: 30px;
-}
-
-.toggle {
-  position: absolute;
-  top: -7px;
-  left: -7px;
-  width: 45px;
-  height: 45px;
-
-  transform: scale(.7);
-
-  background: linear-gradient(145deg, #d8d8d8, #FFFFFF);
-
-  border-radius: 25px;
-
-  box-shadow: 2px 2px 2px #c4c4c496,
-    -2px -2px 2px #fff;
-
-  transition: 0.5s;
-}
-
-#darkmode.active .toggle {
-  left: 23px;
-  transition: 0.5s;
-}
-
-body.active {
-  color: #fff;
-  background: #2a2a2a;
+	transition: 1.5s;
 }
 
 
 /*  NAVBAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
-#navbar.active{
-  background-color: transparent;
+body.dark-mode nav {
+	background-color: #262626;
 }
 
-#lista1.active{
-  color: #fff;
+body.dark-mode #lista1,
+body.dark-mode #lista2,
+body.dark-mode #lista3,
+body.dark-mode #lista4,
+body.dark-mode #lista5{
+	color: #fff;
+
+	transition: 1.5s;
 }
 
-#lista2.active{
-  color: #fff;
+/* MAIN >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+body.dark-mode #main1{
+	background-image: url(../img/FondoZoom_dark.png);
+	background-size: cover;
+	height: 550px;
+	display: flex;
+	justify-content: end;
+
+  transition: 0.5s;
 }
 
-#lista3.active{
-  color: #fff;
+body.dark-mode #main2 {
+	background-image: url(../img/FondoZoom_dark2.png);
+	background-size: cover;
+	height: 550px;
+	display: flex;
+	justify-content: end;
+
+  transition: 0.5s;
 }
 
-#lista4.active{
-  color: #fff;
+body.dark-mode #main3 {
+	background-image: url(../img/FondoZoom_dark1.png);
+	background-size: cover;
+	height: 550px;
+	display: flex;
+	justify-content: end;
+
+	transition: 0.5s;
 }
 
-#lista5.active{
-  color: #fff;
+/* BOTÓN DARKMODE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+#dark-mode-toggle {
+	position: relative;
+	left: 8%;
+
+	float: right;
+
+	width: 60px;
+	height: 30px;
+
+	background: #ebebeb;
+	box-shadow: inset 4px 4px 6px #cecece,
+		inset -4px -4px 6px #fff;
+
+	border-radius: 25px;
+	border: none;
+
+	cursor: pointer;
+
+	transform: scale(0.8);
 }
 
-/*  MAIN >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
-#main0.active{
-  background: #000000 url(../img/FondoZoom_dark.png);
-  background-size: cover;
-  height: 550px;
-  display: flex;
-  justify-content: end;
+.bi-sun {
+	position: absolute;
+	top: 0;
+	right: 30px;
+	width: 30px;
+	height: 30px;
 }
 
-#main.active{
-  background: #000000 url(../img/FondoZoom_dark.png);
-  background-size: cover;
-  height: 550px;
-  display: flex;
-  justify-content: end;
+.bi-moon-fill {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 30px;
+	height: 30px;
 }
 
-#main2.active {
-  background-image: url(../img/FondoZoom_dark2.png);
-  background-size: cover;
-  height: 550px;
-  display: flex;
-  justify-content: end;
+#toggle {
+	position: absolute;
+	top: -7px;
+	left: -7px;
+	width: 45px;
+	height: 45px;
+
+	transform: scale(.7);
+
+	background: linear-gradient(145deg, #d8d8d8, #FFFFFF);
+
+	border-radius: 25px;
+
+	box-shadow: 2px 2px 2px #c4c4c496,
+		-2px -2px 2px #fff;
+
+	transition: 0.5s;
 }
 
-#main3.active {
-  background-image: url(../img/FondoZoom_dark1.png);
-  background-size: cover;
-  height: 550px;
-  display: flex;
-  justify-content: end;
+body.dark-mode #toggle {
+  left: 23px;
+  transition: 0.5s;
 }
-
 
 /*  FOOTER >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
-#footer.active {
-  color: #fff;
-  background-color: transparent;
+body.dark-mode footer {
+	background-color: #262626;
+	color: #fff;
+
+  transition: 0.5s;
 }
 
-#footer.active a {
-  color: #ffc041;
-  text-decoration: none;
+body.dark-mode footer a {
+	color: #ffc041;
+	text-decoration: none;
+
+	transition: 0.5s;
 }
 
-#sky.active {
-  color: #ffc041;
-  text-decoration: none;
+body.dark-mode footer #sky {
+	color: #ffc041;
+	text-decoration: none;
+
+	transition: 0.5s;
 }
