@@ -2,6 +2,7 @@ package com.truquinio.estancias.servicios;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -61,24 +62,40 @@ public class FamiliaServicio {
   /*
    * MÉTODO MODIFICAR FAMILIAS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
-  public void modificarFamilia(String nombre, String email, String password, String password2) throws MiException {
+  public void modificarFamilia(String id, String nombre, String email, String password, String password2)
+      throws MiException {
 
+    validacionServicio.validarId(id);
     validacionServicio.validarNombre(nombre);
     validacionServicio.validarEmail(email);
     validacionServicio.validarPassword(password);
     validacionServicio.validarPassword2(password, password2);
 
-    Familia familia = new Familia();
+    // Optional = Por si id existe o no y si contiene algún error
+    Optional<Familia> respuesta = familiaRepositorio.findById(id);
 
-    // seteo los parametros
-    familia.setNombre(nombre);
-    familia.setEmail(email);
-    familia.setClave(password);
-    familia.setClave(new BCryptPasswordEncoder().encode(password));
-    familia.setRol(Rol.USER);
+    // Valida si la respuesta está presente
+    if (respuesta.isPresent()) {
 
-    // persisto - guardo en BD
-    familiaRepositorio.save(familia);
+      Familia familia = respuesta.get();
+      familia.setNombre(nombre);
+      familia.setEmail(email);
+      familia.setClave(new BCryptPasswordEncoder().encode(password));
+      familia.setRol(Rol.USER);
+
+      // String idImagen = null;
+
+      // if (familia.getImagen() != null) {
+      // idImagen = familia.getImagen().getId();
+      // }
+
+      // Imagen imagen = imagenServicio.actualizar(archivo, idImagen);
+
+      // familia.setImagen(imagen);
+
+      // Persisto en BdD
+      familiaRepositorio.save(familia);
+    }
   }
 
   /*
@@ -102,5 +119,5 @@ public class FamiliaServicio {
 /*
  * Esta clase tiene la responsabilidad de llevar adelante las funcionalidades
  * necesarias para administrar familias (creación, consulta, modificación y
- * eliminación).
+ * eliminación)
  */

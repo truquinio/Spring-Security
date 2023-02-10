@@ -13,9 +13,9 @@
     <div class="container-fluid m-5 contenedor">
       <!-- sec:authorize="hasRole('ADMIN') = Sólo rol ADMIN puede acceder al formulario -->
 
-      <form class="formulario" th:action="@{/familias/modificar__${familia.id}__}" method="POST" enctype="multipart/form-data">
+      <form class="formulario" th:action="@{/familias/modificar/__${familia.id}__}" method="POST" enctype="multipart/form-data">
         <!-- enctype = multipart/form-data = Permite enviar tanto texto como archivos -->
-        <!-- th:action="@{/perfil/__${usuario.id}__}" = @PostMapping("/perfil/{id}" de PortalControladora -->
+        <!-- th:action="@{/lalala/__${usuario.id}__}" = @PostMapping("/perfil/{id}" de PortalControladora -->
 
 
         <div class="form-group my-2">
@@ -34,9 +34,9 @@
           <input type="email" class="form-control" name="email" th:value="${familia.email}" required>
         </div>
 
-        <div class="form-group my-2">
+        <!-- <div class="form-group my-2">
           <input type="file" class="form-control" name="archivo" required>
-        </div>
+        </div> -->
 
         <div class="form-group my-2">
           <input type="password" class="form-control" name="password" placeholder="CONTRASEÑA" th:value="${password}"

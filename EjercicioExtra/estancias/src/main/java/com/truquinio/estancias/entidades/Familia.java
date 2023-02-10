@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor // Crea constructor vacío
 public class Familia extends Usuario {
 
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
+    // @Id
+    // @GeneratedValue(generator = "uuid")
+    // @GenericGenerator(name = "uuid", strategy = "uuid2")
+    // private String id;
 
     private String nombre;
     private Integer edadMin;

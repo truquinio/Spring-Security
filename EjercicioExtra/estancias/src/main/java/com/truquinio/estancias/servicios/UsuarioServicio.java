@@ -36,7 +36,7 @@ public class UsuarioServicio implements UserDetailsService {
    */
   public void crearUsuario(String alias, String email, String password, String password2) throws MiException {
 
-    validacionServicio.validarAlias(alias);
+    validacionServicio.validarNombre(alias);
     validacionServicio.validarEmail(email);
     validacionServicio.validarPassword(password);
     validacionServicio.validarPassword2(password, password2);

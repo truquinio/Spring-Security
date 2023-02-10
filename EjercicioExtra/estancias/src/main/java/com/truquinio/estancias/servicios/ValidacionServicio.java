@@ -15,11 +15,11 @@ public class ValidacionServicio {
   /*
    * VALIDAR ESTANCIA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
-  public void validarId(String id) throws MiException {
-    if (id.isEmpty() || id == null) {
-      throw new MiException("El id no puede estar vacio o ser nulo");
-    }
-  }
+  // public void validarId(String id) throws MiException {
+  //   if (id.isEmpty() || id == null) {
+  //     throw new MiException("El id no puede estar vacio o ser nulo");
+  //   }
+  // }
 
   public void validarHuesped(String huesped) throws MiException {
     if (huesped.isEmpty() || huesped == null) {
@@ -87,7 +87,14 @@ public class ValidacionServicio {
   /*
    * VALIDAR FAMILIA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
-    public void validarAlias(String nombre) throws MiException {
+
+   public void validarId(String id) throws MiException {
+    if (id.isEmpty() || id == null) {
+      throw new MiException("El id no puede estar vacio o ser nulo");
+    }
+  }
+  
+    public void validarNombre(String nombre) throws MiException {
     if (nombre.isEmpty() || nombre == null) {
       throw new MiException("El nombre no puede estar vacio o ser nulo");
     }
@@ -115,10 +122,10 @@ public class ValidacionServicio {
   /*
    * VALIDAR USUARIO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
-  public void validarNombre(String nombre) throws MiException {
-    if (nombre.isEmpty() || nombre == null) {
-      throw new MiException("El alias no puede estar vacio o ser nulo");
-    }
-  }
+  // public void validarNombre(String nombre) throws MiException {
+  //   if (nombre.isEmpty() || nombre == null) {
+  //     throw new MiException("El alias no puede estar vacio o ser nulo");
+  //   }
+  // }
 
 }

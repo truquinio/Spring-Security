@@ -85,32 +85,48 @@ public class FamiliaControlador {
    * MÉTODO MODIFICAR FAMILIAS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
    */
   @GetMapping("/modificar/{id}") // GET = Para trabajar con el HTML
-  public String modificar(@PathVariable String id, ModelMap modelo) {
+  public String modificar(@PathVariable String id, String nombre, String email, String password, String password2,
+      ModelMap modelo) {
 
-    modelo.put("listaFamilias", familiaServicio.getOne(id));
+    modelo.put("familia", familiaServicio.getOne(id));
 
     return "familia_modificar.html";
   }
 
   // LO USO PARA EL BOTÓN ACTUALIZAR
-  // @PostMapping("/modificar/{id}") // POST Modifica la base de datos
-  // public String modificado(@PathVariable String id, @RequestParam String alias,
-  // ModelMap modelo) {
-  // try {
+  @PostMapping("/modificar/{id}") // POST Modifica la base de datos
+  public String modificado(@PathVariable String id, String nombre, String email, String password, String password2,
+      ModelMap modelo) {
 
-  // familiaServicio.modificarFamilia(alias, alias, id, alias);
+    try {
 
-  // return "redirect:/familias/lista";
+      familiaServicio.modificarFamilia(id, nombre, email, password, password2);
 
-  // } catch (MiException ex) {
+      return "redirect:/familias/lista";
 
-  // modelo.put("error", ex.getMessage());
+    } catch (MiException ex) {
 
-  // return "familia_modificar.html";
-  // }
-  // }
+      modelo.put("error", ex.getMessage());
+
+      return "familia_modificar.html";
+    }
+  }
+
+  /*
+   * MÉTODO ELIMINAR FAMILIA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+   */
+  @PostMapping("/eliminar/{id}") // @PathVariable = Obtiene id desde URL
+  public String eliminar(@PathVariable String id, ModelMap modelo) {
+    try {
+      familiaServicio.eliminarFamilias(id);
+      ;
+
+    } catch (MiException e) {
+      modelo.put("error", e.getMessage());
+    }
+    return "redirect:/familias/lista";
+  }
 }
-
 /*
  * Esta clase tiene la responsabilidad de llevar adelante las funcionalidades
  * necesarias para operar con la vista del usuario diseñada para la gestión de
